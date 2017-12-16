@@ -10,14 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171216125919) do
+ActiveRecord::Schema.define(version: 20171216152823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "achievements", force: :cascade do |t|
+    t.integer "proficiency_level_id"
+    t.string "name"
+  end
+
   create_table "classrooms", force: :cascade do |t|
     t.string "name"
     t.integer "teacher_id"
+  end
+
+  create_table "proficiency_levels", force: :cascade do |t|
+    t.integer "level"
+    t.string "statement", null: false
+  end
+
+  create_table "skill_levels", force: :cascade do |t|
+    t.string "level"
+    t.string "statement"
+    t.integer "skill_id"
+    t.integer "proficiency_level_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.integer "subject_id"
+  end
+
+  create_table "student_skill_levels", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "skill_level_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "special_education_need"
+    t.integer "classroom_id"
+    t.integer "year"
+    t.boolean "pupil_premium"
+    t.boolean "free_school_meals"
+    t.boolean "english_as_language"
+    t.boolean "gender"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "teachers", force: :cascade do |t|
