@@ -1,1 +1,60 @@
-<h1> Showing Index for Students controller</h1>
+<div class="ui container center aligned">
+	<h1 class="ui header"> Current Students</h1>
+		<div class="ui inverted segment">
+		  <div class="ui left dividing rail">
+		    <%= render 'students/filter' %>
+		    <%= render 'students/filter' %>
+		 		<%= render 'students/filter' %>
+				<%= render 'students/filter' %>
+		  </div>
+		  <div class="ui right dividing rail">
+		    <div class="ui segment">
+		      Export Features go here.
+		    </div>
+		      <div class="ui segment">
+		      Export Features go here.
+		    </div>
+		      <div class="ui segment">
+		      Export Features go here.
+		    </div>
+		  </div>
+			<table class="ui very compact table">
+				<thead>
+					<tr>
+						<th>Full Name								</th>	
+						<th>Class										</th>
+						<th>Grade										</th>	
+						<th>Special Education Needs	</th>
+						<th>Free School Meals				</th>	
+						<th>English as Language			</th>	
+						<th>Pupil Premium						</th>	
+						<th>Teacher									</th>
+					</tr>
+				</thead>
+				<% @students.each do |student| %>
+					<tr>
+						<td> <%= student.first_name %> <%= student.last_name %> </td>
+						<td> <%= student.classroom.name %> 							 				</td>
+						<td> <%= student.year %> 												 				</td>
+						<td> <%= student.special_education_need %>							</td>
+						<td> <%= student.free_school_meals %> 					 				</td>
+						<td> <%= student.english_as_language %> 				 				</td>
+						<td> <%= student.pupil_premium %> 							 				</td>
+						<td> <%= student.classroom.teacher.first_name %> 			  </td>
+					</tr>
+				<% end %>
+			</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+

@@ -12,25 +12,37 @@
 
   <div class="ui inverted segment">
     <div class="ui inverted secondary pointing menu">
-      <a class="active item">
-        Home
-      </a>
-      <a class="item">
-        Classroom
-      </a>
-      <a class="item">
-        Friends
-      </a>
+      <%= link_to 'Home', pages_path, :class => 'ui large inverted white button' %>
+      <%= link_to 'Classroom', classrooms_path, :class => 'ui large inverted white button' %>
+      <%= link_to 'Student', students_path, :class => 'ui large inverted white button' %>
+        
+
+
+        <div class="right menu">
+          <% if teacher_signed_in? %>
+            
+            <%= link_to current_teacher.email, edit_teacher_registration_path, 
+                                      :class => 'ui inverted white button right floated'  %> 
+            <%= link_to "Logout", destroy_teacher_session_path, 
+                                      method: :delete, 
+                                      :class => 'ui inverted white button right floated'   %>
+          <% else %>
+            <%= link_to "Sign up", new_teacher_registration_path, 
+                                      :class => 'ui inverted white button right floated'  %> 
+            <%= link_to "Login", new_teacher_session_path, 
+                                      :class => 'ui inverted white button right floated'  %>
+          <% end %>
+        </div>
     </div>
   </div>
 
-  <body>
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-    <%= yield %>
-  </body>
+    <body>
+      <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </body>
 </html>

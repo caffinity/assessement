@@ -1,1 +1,10 @@
-<h1>Showing Classrooms Index</h1>
+<div class="ui container">
+	<h1>Showing Classrooms Index</h1>
+	<% @classroom.each do |classroom| %>
+		<ul>
+			<li>		 <%= classroom.name %></li>
+			<li>Teacher: <%= classroom.teacher.first_name %> <%= classroom.teacher.last_name %></li>
+		</ul>	
+	<% end %>
+		<%= link_to "new classroom", new_classroom_path, :class => 'ui large green button'  %>
+</div>
