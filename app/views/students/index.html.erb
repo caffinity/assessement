@@ -1,6 +1,6 @@
 <div class="ui container center aligned">
 	<h1 class="ui header"> Current Students</h1>
-		<div class="ui inverted segment">
+		<div class="ui green segment">
 		  <div class="ui left dividing rail">
 		    <%= render 'students/filter' %>
 		    <%= render 'students/filter' %>
@@ -9,14 +9,14 @@
 		  </div>
 		  <div class="ui right dividing rail">
 		    <div class="ui segment">
-		      Export Features go here.
+		    	<%= link_to 'Create New Student', new_student_path, :class => "ui large inverted green button" %>
 		    </div>
-		      <div class="ui segment">
-		      Export Features go here.
-		    </div>
-		      <div class="ui segment">
-		      Export Features go here.
-		    </div>
+		    <div class="ui segment">
+		     	<div class="ui inverted blue button"> Bulk Upload </div>		  
+		   	</div>
+		    <div class="ui segment">
+		     	<div class="ui inverted blue button"> Report Download </div>
+	    	</div>
 		  </div>
 			<table class="ui very compact table">
 				<thead>
