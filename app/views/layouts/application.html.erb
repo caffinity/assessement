@@ -20,9 +20,7 @@
 
         <div class="right menu">
           <% if teacher_signed_in? %>
-            
-            <%= current_teacher.first_name %>
-            <%= link_to current_teacher.first_name, edit_teacher_registration_path, 
+            <%= link_to "Logged in as: #{current_teacher.first_name}", edit_teacher_registration_path, 
                                       :class => 'ui inverted white button right floated'  %> 
             <%= link_to "Logout", destroy_teacher_session_path, 
                                       method: :delete, 

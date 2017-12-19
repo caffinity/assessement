@@ -2,21 +2,23 @@
 	<h1 class="ui header center aligned"> Create New Student</h1>
 
 
-	<%= form_for :student do |form| %>
-		
+	<%= form_for Student.new do |form| %>
 		First name <%= form.text_field :first_name %>
 		Last name <%= form.text_field :last_name %>
-		Classroom <%= form.text_field :classroom_id %>
 		Grade (year) <%= form.text_field :year %>
 		Pupil Premium <%= form.check_box :pupil_premium %>
 		Free School Meals <%= form.check_box :free_school_meals %>
 		EAL <%= form.check_box :english_as_language %>
 		Gender <%= form.check_box :gender %>
-
-
-
-			<%= form.submit 'Create Student', :class => 'ui green button' %>
+		Class <%= form.select(:classroom_id, options_for_select(Classroom.all.pluck(:name, :id)), :class => 'ui dropdown' ) %>
 	
+		<%= form.submit 'Create Student', :class => 'ui green button' %>
+	
+			<select class="ui dropdown">
+			  <option value="">Gender</option>
+			  <option value="1">Male</option>
+			  <option value="0">Female</option>
+			</select>
 	<% end %>
 
 

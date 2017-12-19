@@ -33,8 +33,8 @@
 				</thead>
 				<% @students.each do |student| %>
 					<tr>
-						<td> <%= student.first_name %> <%= student.last_name %> </td>
-						<td> <%= student.classroom.name %> 							 				</td>
+						<td> <%= link_to "#{student.first_name} #{student.last_name}", student_path(student) %>  </td>
+						<td> <%= link_to "#{student.classroom.name}", classroom_path(student) %> 							 				</td>
 						<td> <%= student.year %> 												 				</td>
 						<td> <%= student.special_education_need %>							</td>
 						<td> <%= student.free_school_meals %> 					 				</td>
@@ -54,7 +54,7 @@
 
 
 
-
+<%= render 'students/pie' %>
 </div>
 
 

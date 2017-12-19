@@ -4,6 +4,7 @@ class StudentsController < ApplicationController
 
 
 	def index
+		redirect_to new_classroom_path unless current_teacher.classroom || current_teacher.admin?
 		@students =	current_teacher.admin? ? Student.all : current_teacher.classroom
 	end
 
@@ -12,34 +13,36 @@ class StudentsController < ApplicationController
 	end
 
 	def show
+		@student = Student.find(params[:id])
 	end
 
 
 	def create
-		@students = Student.new(params(student_params))
-
-		if @student.save?
-			redirect_to student_path
+		@student = Student.new(student_params)
+		if @student.save
+			redirect_to students_path
 		else
 			render 'show'
 		end
 	end
 
+	def destroy
+		@student.destroy
+	end
 
 
 	  private
 
 	  def student_params
-	  	params.require(:students).permit(	:first_name, 
+	  	params.require(:student).permit(	:first_name, 
 	  																		:last_name, 
 	  																		:special_needs_education,
 	  																		:classroom_id,
 	  																		:year,
 	  																		:pupil_premium,
 	  																		:english_as_language,
-	  																		:gender
+	  																		:gender,
+	  																		:free_school_meals
 	  																	)
 	  end
-
-
-end
+	end

@@ -1,6 +1,6 @@
 class ClassroomsController < ApplicationController
   before_action :authenticate_teacher!
-
+  before_action :set_classroom, only: [:show, :destroy] 
 
   def index
   	@students = Student.all
@@ -13,7 +13,18 @@ class ClassroomsController < ApplicationController
   end
 
   def show
+    @students = Student.where(classroom: @classroom)
+  end
+
+  def destroy
+    @classroom.destroy
+    redirect_to 'index'
   end
 
 
+  private 
+
+  def set_classroom 
+    @classroom = Classroom.find(params[:id])
+  end
 end

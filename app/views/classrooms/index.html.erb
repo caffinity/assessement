@@ -1,10 +1,30 @@
-<div class="ui container">
+<div class="ui container center aligned">
 	<h1>Showing Classrooms Index</h1>
-	<% @classroom.each do |classroom| %>
-		<ul>
-			<li>		 <%= classroom.name %></li>
-			<li>Teacher: <%= classroom.teacher.first_name %> <%= classroom.teacher.last_name %></li>
-		</ul>	
-	<% end %>
-		<%= link_to "new classroom", new_classroom_path, :class => 'ui large green button'  %>
+		<div class="ui segment">
+			<div class="ui special cards center alinged">
+				<% @classroom.each do |classroom| %>
+					<div class="card">
+				    <div class="blurring dimmable image">
+				      <div class="ui dimmer">
+				        <div class="content">
+				          <div class="center">
+				            <div class="ui inverted button">Add Friend</div>
+				          </div>
+				        </div>
+				      </div>
+				      <%= image_tag 'Pentland_square' %>
+				    </div>
+				    <div class="content">
+				      <%= link_to "#{classroom.name}", classroom_path(classroom), :class => 'ui large inverted green button' %> 
+				      <div class="meta">
+				        <%= classroom.teacher.first_name %> <%= classroom.teacher.last_name %>
+				      </div>
+				    </div>
+				    <div class="extra content">
+				    </div>
+				  </div>
+				 <% end %>
+			 </div>
+			</div>
+			<%= link_to "new classroom", new_classroom_path, :class => 'ui large green button'  %>
 </div>
