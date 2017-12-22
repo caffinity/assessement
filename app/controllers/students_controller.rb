@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
 	before_action :authenticate_teacher!
-
+	before_action :set_student, only: [:show, :edit, :destroy]
 
 
 	def index
@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
 		@students =	current_teacher.admin? ? Student.all : current_teacher.classroom
 	end
 
-	def new	
+	def new
 		@students = Student.new
 	end
 
@@ -16,7 +16,9 @@ class StudentsController < ApplicationController
 		@student = Student.find(params[:id])
 	end
 
-
+	def edit
+	end
+  
 	def create
 		@student = Student.new(student_params)
 		if @student.save
@@ -33,9 +35,13 @@ class StudentsController < ApplicationController
 
 	  private
 
+	def set_student
+    @student = Student.find(params[:id])
+  end
+
 	  def student_params
-	  	params.require(:student).permit(	:first_name, 
-	  																		:last_name, 
+	  	params.require(:student).permit(	:first_name,
+	  																		:last_name,
 	  																		:special_needs_education,
 	  																		:classroom_id,
 	  																		:year,

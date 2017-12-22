@@ -1,0 +1,9 @@
+<div class="ui container">
+  <h1 class="ui header center aligned"> Displaying subjects/New</h1>
+
+  <%= form_for Subject.new do |form| %>
+    <%= form.text_field :name %>
+      <%= form.submit %>
+  <% end %>
+
+</div>

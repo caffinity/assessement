@@ -1,0 +1,15 @@
+<div class="ui container">
+  <h2 class="ui header center aligned">Displaying Subjects / Index</h2>
+
+
+  <div class="ui cards">
+    <% @subject.each do |subject| %>
+
+        <div class="ui card">
+          <%= link_to subject.name, subject_path(subject) %><p>
+        </div>
+    <% end %>
+</div>
+
+<%= link_to 'Create Subject', new_subject_path, :class => 'ui small inverted green button' %>
+</div>

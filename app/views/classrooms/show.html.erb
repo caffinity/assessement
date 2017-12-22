@@ -1,13 +1,31 @@
 <div class="ui container center aligned">
-	<h1> Showing awesomess </h1>
-
-
-	<% @students.each do |student| %>
-
-		<%= student.first_name %>
-		<%= student.last_name %>
-
-	<% end %>
-
-
+	<h1>Welcome to <%= @classroom.name %> Class </h1>
+	<h4><%= @classroom.teacher.first_name %> is da boss</h4>	
+	<div class="ui five wide special cards">
+		<% @students.each do |student| %>
+			<div class="card">
+		    <div class="image">
+		      <%= image_tag 'Pentland_square' %>
+		    </div>
+		    <div class="content">
+		      <%= link_to "#{student.first_name}
+				 #{student.last_name}", student_path(student), :class => 'ui header' %>
+		      <div class="meta">
+		        <span class="date"></span>
+		      </div>
+		    </div>
+		    <div class="extra content">
+		      <a>
+		        <i class="users icon"></i>
+		        Lauren is amazing
+		      </a>
+		    </div>
+		  </div>
+		<% end %>
+	</div>
 </div>
+
+
+
+
+  

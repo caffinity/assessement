@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20171218183639) do
 
   create_table "students", force: :cascade do |t|
     t.string "first_name"
-    t.string "last_name"
+    t.string "la st_name"
     t.string "special_education_need"
     t.integer "classroom_id"
     t.integer "year"
