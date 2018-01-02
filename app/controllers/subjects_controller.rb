@@ -13,6 +13,7 @@ class SubjectsController < ApplicationController
 
   def show
     @subjects = Subject.find(params[:id])
+    @skills = Skill.all
   end
 
   def create
