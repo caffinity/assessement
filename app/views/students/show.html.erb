@@ -2,29 +2,29 @@
 		<div class="ui segment">
 		  <div class="ui left very close rail">
 		    <div class="ui segment">
-		      <%= link_to "Return to Class", classroom_path(@student.classroom), 
-		      						:class => 'ui massive inverted green button center aligned' %> 
+		      <%= link_to "Return to Class", classroom_path(@student.classroom),
+		      						:class => 'ui massive inverted green button center aligned' %>
 		    </div>
 		    <div class="ui segment">
-		    	<h1 class="ui header center aligned"> Grade <%= @student.year %></h1>	
+		    	<h1 class="ui header center aligned"> Grade <%= @student.year %></h1>
 
 		    </div>
 		  </div>
-		  	
+
 		  <div class="ui right very close rail">
-		    <div class="ui segment"> 
-		    	<%= link_to "Update Student", edit_student_path, 
+		    <div class="ui segment">
+		    	<%= link_to "Update Student", edit_student_path,
 		    			:class => 'ui massive inverted blue button' %>
 		    </div>
 		    <div class="ui segment">
-		      <% if @student.gender? %> 
+		      <% if @student.gender? %>
 		      <h1><i class="male icon"></i>Male</h1>
 		      <% else %>
 		      <h1><i class="female icon"></i>Female</h1>
 		      <% end %>
 		    </div>
 		    <div class="ui segment">
-		      <% if @student.free_school_meals? %> 
+		      <% if @student.free_school_meals? %>
 		      	<h1><i class="food icon"></i>Yes</h1>
 		      <% else %>
 		      	<h4><i class="remove icon"></i>No Free School Meals</h4>
@@ -35,10 +35,10 @@
 		    	<%= @student.special_education_need %>
 		    </div>
 		  </div>
-				<h1 class="ui header center aligned"> 
-					<%= @student.first_name %> <%= @student.last_name %> 
+				<h1 class="ui header center aligned">
+					<%= @student.first_name %> <%= @student.last_name %>
 				</h1>
-					<%= pie_chart({ "Reading P2" => 10, 
+					<%= pie_chart({ "#{@student.first_name}" => 10, 
 														"Listening P7" => 10,
 														"Writing P3" => 10,
 														"Speaking P3" => 10,

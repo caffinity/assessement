@@ -12,7 +12,7 @@
 		    	<%= link_to 'Create New Student', new_student_path, :class => "ui large inverted green button" %>
 		    </div>
 		    <div class="ui segment">
-		     	<div class="ui inverted blue button"> Bulk Upload </div>		  
+		     	<div class="ui inverted blue button"> Bulk Upload </div>
 		   	</div>
 		    <div class="ui segment">
 		     	<div class="ui inverted blue button"> Report Download </div>
@@ -21,20 +21,20 @@
 			<table class="ui very compact table">
 				<thead>
 					<tr>
-						<th>Full Name								</th>	
+						<th>Full Name								</th>
 						<th>Class										</th>
-						<th>Grade										</th>	
+						<th>Grade										</th>
 						<th>Special Education Needs	</th>
-						<th>Free School Meals				</th>	
-						<th>English as Language			</th>	
-						<th>Pupil Premium						</th>	
+						<th>Free School Meals				</th>
+						<th>English as Language			</th>
+						<th>Pupil Premium						</th>
 						<th>Teacher									</th>
 					</tr>
 				</thead>
 				<% @students.each do |student| %>
 					<tr>
 						<td> <%= link_to "#{student.first_name} #{student.last_name}", student_path(student) %>  </td>
-						<td> <%= link_to "#{student.classroom.name}", classroom_path(student) %> 							 				</td>
+						<td> <%= link_to "#{student.classroom.name}", classroom_path(student.classroom_id) %> 							 				</td>
 						<td> <%= student.year %> 												 				</td>
 						<td> <%= student.special_education_need %>							</td>
 						<td> <%= student.free_school_meals %> 					 				</td>
@@ -56,5 +56,3 @@
 
 <%= render 'students/pie' %>
 </div>
-
-
