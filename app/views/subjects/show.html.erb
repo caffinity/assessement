@@ -1,12 +1,39 @@
 <div class="ui container">
   <h1 class="ui header center aligned">
+    Showing <%= @subject.name %>
+  </h1>
 
-    Showing <%= @subjects.name %> </h1>
-    <table>
-      <th> <%= @subjects.name %> Skills </th>
-        <% @skills.each do |skills| %>
-          <tr><%= skills.name %></tr>
-        <% end %>
-    </table>
+
+    <% @skills.each do |skill| %>
+      <%= skill.name %>
+   <% end %>
+
+  <%= link_to 'New Skill level', new_subject_skill_path(@subject), :class => 'ui green inverted button' %>
   <%= link_to 'Return', subjects_path, :class => 'ui green inverted button' %>
+
+
+
+  <table class="ui very compact table">
+    <thead>
+      <tr>
+        <th>Full Name								</th>
+        <th>Class										</th>
+        <th>Grade										</th>
+        <th>Special Education Needs	</th>
+        <th>Free School Meals				</th>
+        <th>English as Language			</th>
+        <th>Pupil Premium						</th>
+        <th>Teacher									</th>
+      </tr>
+    </thead>
+    <% @skills.each do |skill| %>
+      <tr>
+        <td><%= skill.name %></td>
+        <td><%= skill.name %></td>
+        <td><%= skill.name %></td>
+        <td><%= skill.name %></td>
+        </tr>
+    <% end %>
+  </table>
+
 </div>

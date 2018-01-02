@@ -1,8 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :authenticate_teacher!
 
-
-
   def index
     @subject = Subject.all
   end
@@ -12,16 +10,18 @@ class SubjectsController < ApplicationController
   end
 
   def show
-    @subjects = Subject.find(params[:id])
-    @skills = Skill.all
+    @subject = Subject.find(params[:id])
+    @skills = @subject.skills
+    @all_skills = Skill.all
   end
 
   def create
     @subjects = Subject.new(subject_params)
     if @subjects.save
       redirect_to subjects_path
+      binding pry
     else
-      render 'show'
+      redirect_to root_path
     end
   end
 

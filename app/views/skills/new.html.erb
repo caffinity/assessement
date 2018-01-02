@@ -1,0 +1,11 @@
+<h1>Showing Skills new</h1>
+
+
+
+
+<%= form_for @skill, :url => subject_skills_path(@subject) do |f| %>
+
+  <%= f.text_field :name %>
+  <%= f.hidden_field(:subject_id, :value => @subject) %>
+  <%= f.submit %>
+<% end %>
