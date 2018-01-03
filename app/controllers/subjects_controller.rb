@@ -12,14 +12,12 @@ class SubjectsController < ApplicationController
   def show
     @subject = Subject.find(params[:id])
     @skills = @subject.skills
-    @all_skills = Skill.all
   end
 
   def create
-    @subjects = Subject.new(subject_params)
-    if @subjects.save
+    @subject = Subject.new(subject_params)
+    if @subject.save
       redirect_to subjects_path
-      binding pry
     else
       redirect_to root_path
     end

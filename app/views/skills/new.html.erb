@@ -6,6 +6,6 @@
 <%= form_for @skill, :url => subject_skills_path(@subject) do |f| %>
 
   <%= f.text_field :name %>
-  <%= f.hidden_field(:subject_id, :value => @subject) %>
+  <%= f.hidden_field(:subject_id, :value => @subject.id) %>
   <%= f.submit %>
 <% end %>
