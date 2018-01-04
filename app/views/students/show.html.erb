@@ -38,14 +38,15 @@
 				<h1 class="ui header center aligned">
 					<%= @student.first_name %> <%= @student.last_name %>
 				</h1>
-					<%= pie_chart({ "#{@student.first_name}" => 10, 
-														"Listening P7" => 10,
-														"Writing P3" => 10,
-														"Speaking P3" => 10,
-														"Numbers P8" => 10,
-														"Shapes and Measures P4" => 10,
-														"Geometry P3" => 10,
-														"Space & stuff P3" => 10,
+					<%= pie_chart({ "#{@student.first_name}" => 1,
+														"Listening P7" => 1,
+														"Writing P3" => 1,
+														"Speaking P3" => 1,
+														"Numbers P8" => 1,
+														"Shapes and Measures P4" => 1,
+														"Geometry P3" => 1,
+														"Space & stuff P3" => 1,
+                            
 													}) %>
 		</div>
 		<div class="ui raised segment">
