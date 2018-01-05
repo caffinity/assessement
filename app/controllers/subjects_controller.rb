@@ -3,6 +3,7 @@ class SubjectsController < ApplicationController
 
   def index
     @subject = Subject.all
+    @skills = Skill.all
   end
 
   def new

@@ -1,11 +1,8 @@
 <h1>Showing Skills new</h1>
+  <%= form_for @skill, :url => subject_skills_path(@subject) do |f| %>
+    <%= f.text_field :name %>
+    <%= f.hidden_field(:subject_id, :value => @subject.id) %>
+    <%= f.submit %>
+  <% end %>
 
-
-
-
-<%= form_for @skill, :url => subject_skills_path(@subject) do |f| %>
-
-  <%= f.text_field :name %>
-  <%= f.hidden_field(:subject_id, :value => @subject.id) %>
-  <%= f.submit %>
-<% end %>
+<%= link_to "Return to #{@subject.name}", subject_path(@subject), :class => 'ui green inverted button' %>

@@ -1,9 +1,10 @@
 <div class="ui container">
   <h1 class="ui header center aligned"> Displaying subjects/New</h1>
+    <%= form_for Subject.new do |form| %>
+      <%= form.text_field :name %>
+        <%= form.submit %>
+    <% end %>
+  <%= link_to "Return to Subjects", subjects_path, :class => 'ui green inverted button' %>
 
-  <% form_for Subject.new do |form| %>
-    <%= form.text_field :name %>
-      <%= form.submit %>
-  <% end %>
 
 </div>

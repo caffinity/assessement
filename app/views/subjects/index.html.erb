@@ -2,14 +2,32 @@
   <h2 class="ui header center aligned">Current Subjects</h2>
 
 
-
   <div class="ui cards center aligned">
     <% @subject.each do |subject| %>
-        <div class="ui card center aligned">
-          <%= link_to subject.name, subject_path(subject) %><p>
-        </div>
+      <div class="ui card center aligned">
+        <%= link_to subject.name, subject_path(subject) %><p>
+      </div>
     <% end %>
-</div>
-<div class="ui divider"> </div>
-<%= link_to 'Create Subject', new_subject_path, :class => 'ui small inverted green button' %>
-</div>
+  </div>
+  <div class="ui divider"> </div>
+    <% if current_teacher.admin? %>
+      <%= link_to 'Create Subject', new_subject_path, :class => 'ui mini inverted green button' %>
+    <% end %>
+  </div>
+    <h3 class="ui header center aligned"> Subject Skills Overview </h3>
+    <div class="ui container center aligned">
+      <table class="ui very compact table">
+        <thead>
+          <tr>
+            <th>Skill		</th>
+            <th>Subject	</th>
+          </tr>
+        </thead>
+        <% @skills.each do |skill| %>
+          <tr>
+            <td><%= link_to skill.name, skill_url(skill) %> </td>
+            <td><%= skill.subject.name %>                   </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>

@@ -16,9 +16,9 @@ class SkillsController < ApplicationController
 
   def create
     @subject = Subject.find(params[:subject_id])
-    @skill = Skill.new(skills_params)
+    @skill = Skill.new()
     if @skill.save
-      redirect_to subject_skill_path(@skill.subject, @skill)
+      redirect_to subject_path(@subject)
     else
       render 'index'
     end

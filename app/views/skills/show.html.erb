@@ -1,6 +1,7 @@
-<h1>Showing Show.</h1>
+<h1>Showing <%= @skill.name %></h1>
 
 
-<%= @skill.name %>
 
-<%= link_to 'link', subject_path(@subject) %>
+
+<%= link_to 'Return to Subjects', subject_path(@subject), :class => 'ui green inverted button' %>
+<%= link_to 'New Skill Level', new_skill_skilllevel_path(@skill), :class => 'ui green inverted button' %>
