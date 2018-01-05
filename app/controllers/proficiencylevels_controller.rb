@@ -1,0 +1,2 @@
+class ProficiencylevelsController < ApplicationController
+end
