@@ -3,5 +3,4 @@
 
 <%= @skill.name %>
 
-<%= link_to "return", subject_path(@subject), :class => 'ui button' %>
-<%= link_to "delete", subject_skill_path(@skill), :method => :delete, :data => {:confirm => "ARE YOU SURE? THIS CANNOT BE UNDONE!"}, :class => 'ui red button' %>
+<%= link_to 'link', subject_path(@subject) %>

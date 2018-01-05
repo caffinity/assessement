@@ -18,7 +18,7 @@
     </thead>
     <% @skills.each do |skill| %>
       <tr>
-        <td><%= link_to skill.name, subject_skill_path(@subject, skill) %></td>
+        <td><%= link_to skill.name, skill_url(skill) %> </td>
         <td><%= skill.name %></td>
         </tr>
     <% end %>

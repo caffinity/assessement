@@ -1,7 +1,7 @@
 class SkillsController < ApplicationController
 
   def show
-      @subject = Subject.find(params[:subject_id])
+      @subject = Skill.find(params[:id]).subject_id
       @skill = Skill.find(params[:id])
   end
 

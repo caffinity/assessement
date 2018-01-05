@@ -1,6 +1,6 @@
 <div class="ui container center aligned">
 	<h1>Welcome to <%= @classroom.name %> Class </h1>
-	<h4><%= @classroom.teacher.first_name %> is da boss</h4>	
+	<h4>This is <%= @classroom.teacher.first_name %>'s class</h4>
 	<div class="ui five wide special cards">
 		<% @students.each do |student| %>
 			<div class="card">
@@ -17,15 +17,10 @@
 		    <div class="extra content">
 		      <a>
 		        <i class="users icon"></i>
-		        Lauren is amazing
+		         Achieved % this term
 		      </a>
 		    </div>
 		  </div>
 		<% end %>
 	</div>
 </div>
-
-
-
-
-  
