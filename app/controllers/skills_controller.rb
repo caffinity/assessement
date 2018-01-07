@@ -3,6 +3,7 @@ class SkillsController < ApplicationController
   def show
       @subject = Skill.find(params[:id]).subject_id
       @skill = Skill.find(params[:id])
+      @skill_level = SkillLevel.find_by(skill_id: :id)
   end
 
   def index
@@ -17,6 +18,7 @@ class SkillsController < ApplicationController
   def create
     @subject = Subject.find(params[:subject_id])
     @skill = Skill.new()
+    binding.pry
     if @skill.save
       redirect_to subject_path(@subject)
     else

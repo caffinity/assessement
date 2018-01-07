@@ -5,3 +5,9 @@
 
 <%= link_to 'Return to Subjects', subject_path(@subject), :class => 'ui green inverted button' %>
 <%= link_to 'New Skill Level', new_skill_skilllevel_path(@skill), :class => 'ui green inverted button' %>
+
+
+<% @skill.skill_levels.each do |skill_level| %>
+  <%= skill_level.level %>
+  <%= skill_level.statement %>
+<% end %>

@@ -1,5 +1,9 @@
 class SkilllevelsController < ApplicationController
 
+  def show
+    @skill_level = SkillLevel.find(params[:id])
+  end
+
   def new
     @skill          = Skill.find(params[:skill_id])
     @skill_level    = SkillLevel.new()
@@ -7,8 +11,9 @@ class SkilllevelsController < ApplicationController
   end
 
   def create
-    @skill_level   = SkillLevel.new
-
+    @skill         = Skill.find(params[:skill_id])
+    @skill_level   = SkillLevel.new(skilllevel_params)
+    binding.pry
     if @skill_level.save
       redirect_to skilllevel_path(@skill_level)
     else
@@ -23,7 +28,7 @@ class SkilllevelsController < ApplicationController
     params.require(:skill).permit(:name, :subject_id, :id)
   end
   def skilllevel_params
-    params.require(:skilllevel).permit(:id, :level,  :statement, :skill_id, :proficiency_id)
+    params.require(:skill_level).permit(:id, :level,  :statement, :skill_id)
   end
 
 end

@@ -8,7 +8,7 @@
   <%= form_for(@skill_level, url: skill_skilllevels_path(@skill)) do |f| %>
     <%= f.text_field :level %>
     <%= f.text_area :statement %>
-    <%= f.hidden_field(:skill, :value => @skill.id) %>
+    <%= f.hidden_field(:skill_id, :value => @skill.id) %>
     <%= f.submit %>
   <% end %>
         This is where the form for creating new skill levels will go.
