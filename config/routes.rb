@@ -9,11 +9,12 @@ Rails.application.routes.draw do
 
   resources :subjects do
     resources :skills, shallow: true do
-      resources :skilllevels, shallow: true
-      resources :proficiencylevels, shallow: true do
+      resources :skilllevels, shallow: true do
+        resources :proficiencylevels, shallow: true do
           resources :achievements
         end
       end
     end
+  end
 
 end

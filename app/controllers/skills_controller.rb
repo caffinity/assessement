@@ -17,8 +17,7 @@ class SkillsController < ApplicationController
 
   def create
     @subject = Subject.find(params[:subject_id])
-    @skill = Skill.new()
-    binding.pry
+    @skill = Skill.new(skills_params)
     if @skill.save
       redirect_to subject_path(@subject)
     else

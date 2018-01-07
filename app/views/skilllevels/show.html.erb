@@ -1,11 +1,27 @@
 <h1>showing the Skill level for </h1>
-<%= @skill_level.level %>
-<%= @skill_level.statement %>
-<%= @skill_level.skill_id %>
-<%= @skill_level.skill.name %>
-<%= @skill_level.skill.subject.name %>
 
+
+
+<table class="ui very compact table">
+  <thead>
+    <tr>
+      <th> Skill Level</th>
+      <th> Statement  </th>
+      <th> Skill Id   </th>
+      <th> Skill Name </th>
+      <th> Subject Name </th>
+    </tr>
+  </thead>
+    <td> <%= @skill_level.level %>             </td>
+    <td><%= @skill_level.statement %>          </td>
+    <td><%= @skill_level.skill_id %>           </td>
+    <td><%= @skill_level.skill.name %>         </td>
+    <td><%= @skill_level.skill.subject.name %> </td>
+</table>
 <%= link_to 'Back', :back, :class => 'ui inverted green button' %>
 <%= link_to "Return to #{@skill_level.skill.name}",
             skill_path(@skill_level.skill_id),
+            :class => 'ui inverted green button' %>
+<%= link_to 'New Proficiency Level',
+            new_skilllevel_proficiencylevel_path(@skill_level),
             :class => 'ui inverted green button' %>

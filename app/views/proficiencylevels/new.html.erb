@@ -1,13 +1,15 @@
 <h1>Showing Proficiency Level / New page from the #Proficiency Controller</h1>
 
 
-<%= @skill.name %>
-<%= @skill.id %>
-<%= @skill.subject.name %>
+<%= @skill_level.level %>
+<%= @skill_level.statement %>
+<%= @skill_level.skill.subject.name %>
 
 
-  <%= form_for(@proficiency_level, url: skill_proficiencylevels_path) do |f| %>
+  <%= form_for(@proficiency_level, url: skilllevel_proficiencylevels_path(@skill_level.id)) do |f| %>
     <%= f.text_field :level %>
     <%= f.text_area :statement %>
+    <%= f.hidden_field(:skill_levels, value: @skill_level.id) %>
+
     <%= f.submit %>
   <% end %>

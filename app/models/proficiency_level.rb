@@ -1,4 +1,3 @@
 class ProficiencyLevel < ApplicationRecord
-  belongs_to :skilllevel
-  belongs_to :student
+  belongs_to :skill_level
 end
