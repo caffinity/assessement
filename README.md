@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is designed to be deployed in a school to help teachers keep
+track of their students progress.
 
-Things you may want to cover:
+This project is the result of me learning ruby from scratch. I am working out
+everything as I go.
 
-* Ruby version
+Wish me luck!
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Alexander

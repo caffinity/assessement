@@ -5,10 +5,9 @@
 
 
 
-  <%= form_for @skilllevel, :url => skill_skilllevels_path(@skill) do |f| %>
+  <%= form_for(@skill_level, url: skill_skilllevels_path(@skill)) do |f| %>
     <%= f.text_field :level %>
     <%= f.text_area :statement %>
-    <%= f.text_field :proficiency_level %>
     <%= f.hidden_field(:skill, :value => @skill.id) %>
     <%= f.submit %>
   <% end %>
@@ -16,5 +15,18 @@
       </p>
         <%= link_to "Back to #{@skill.name}", skill_url(@skill),
             :class => 'ui inverted green button'%>
+
+
+
+
+            <% @students.each do |student| %>
+            <%= student.first_name %>
+            <%= student.last_name %>
+            <% end %>
+
+
+            <%= @skill.name %>
+            <%= @skill.id %>
+            <%= @skill.skill_levels.last %>
 
 </div>

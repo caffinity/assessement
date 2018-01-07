@@ -1,18 +1,18 @@
 class SkilllevelsController < ApplicationController
 
   def new
-    @skill        = Skill.find(params[:skill_id])
-    @skilllevel   = SkillLevel.new()
+    @skill          = Skill.find(params[:skill_id])
+    @skill_level    = SkillLevel.new()
+    @students       = Student.all
   end
 
   def create
-    @skill        = Skill.find(params[:skill_id])
-    @skilllevel   = SkillLevel.new(skilllevel_params)
-    binding.pry
-    if @skilllevel.save
-      redirect_to skilllevel_path(@skillLevel)
+    @skill_level   = SkillLevel.new
+
+    if @skill_level.save
+      redirect_to skilllevel_path(@skill_level)
     else
-      binding.pry
+
       render 'index'
     end
   end
