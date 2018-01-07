@@ -4,3 +4,8 @@
 <%= @skill_level.skill_id %>
 <%= @skill_level.skill.name %>
 <%= @skill_level.skill.subject.name %>
+
+<%= link_to 'Back', :back, :class => 'ui inverted green button' %>
+<%= link_to "Return to #{@skill_level.skill.name}",
+            skill_path(@skill_level.skill_id),
+            :class => 'ui inverted green button' %>

@@ -1,13 +1,18 @@
 <h1>Showing <%= @skill.name %></h1>
-
-
-
-
-<%= link_to 'Return to Subjects', subject_path(@subject), :class => 'ui green inverted button' %>
-<%= link_to 'New Skill Level', new_skill_skilllevel_path(@skill), :class => 'ui green inverted button' %>
-
-
-<% @skill.skill_levels.each do |skill_level| %>
-  <%= skill_level.level %>
-  <%= skill_level.statement %>
-<% end %>
+  <%= link_to 'Return to Subjects', subject_path(@subject), :class => 'ui green inverted button' %>
+  <%= link_to 'New Skill Level', new_skill_skilllevel_path(@skill), :class => 'ui green inverted button' %>
+  <table class="ui very compact table">
+    <thead>
+      <tr>
+        <th>Skill Level     </th>
+        <th>Statement	  		</th>
+      </tr>
+    </thead>
+    <% @skill_level.each do |skill_level| %>
+      <tr>
+        <td><%= link_to skill_level.level, skilllevel_path(skill_level) %> </td>
+        <td><%= skill_level.statement %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
