@@ -15,7 +15,9 @@ FactoryBot.define do
     end
 
     trait :with_skill_level do
-      skill_levels{ build_list(:skill_level, 8, :with_proficiency_level, student: student)}
+      after(:create) do |student, _evaluator|
+        create_list(:skill_level, 8, student: student)
+      end
     end
   end
 end
