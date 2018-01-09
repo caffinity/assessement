@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :classrooms
 
   resources :students, shallow: true do
-    resources :skilllevels
+    resources :skill_levels
   end
-  resources :subjects, :skills, :proficiencylevels
+  resources :subjects, :skills, :proficiency_levels
 end
