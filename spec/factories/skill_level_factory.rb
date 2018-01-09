@@ -1,11 +1,7 @@
 FactoryBot.define do
   factory :skill_level do
     statement     { Faker::Lorem.words.join(' ') }
-
-
-    trait :with_proficiency_level do
-      proficiency_level skill_level: skill_level
-    end
+    proficiency_level
 
     trait :with_student do
       student
