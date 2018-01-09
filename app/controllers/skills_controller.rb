@@ -3,7 +3,7 @@ class SkillsController < ApplicationController
   def show
       @subject = Skill.find(params[:id]).subject_id
       @skill = Skill.find(params[:id])
-      @skill_level = SkillLevel.where(skill_id: @skill.id)
+      @proficiency_level = ProficiencyLevel.where(skill_id: @skill.id)
   end
 
   def index

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180107215207) do
+ActiveRecord::Schema.define(version: 20180109171730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,24 +33,21 @@ ActiveRecord::Schema.define(version: 20180107215207) do
   create_table "proficiency_levels", force: :cascade do |t|
     t.integer "level"
     t.string "statement", null: false
-    t.bigint "skill_levels_id"
-    t.index ["skill_levels_id"], name: "index_proficiency_levels_on_skill_levels_id"
+    t.bigint "skill_id"
+    t.index ["skill_id"], name: "index_proficiency_levels_on_skill_id"
   end
 
   create_table "skill_levels", force: :cascade do |t|
-    t.string "level"
     t.string "statement"
-    t.integer "skill_id"
+    t.bigint "student_id"
+    t.bigint "proficiency_level_id"
+    t.index ["proficiency_level_id"], name: "index_skill_levels_on_proficiency_level_id"
+    t.index ["student_id"], name: "index_skill_levels_on_student_id"
   end
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
     t.integer "subject_id"
-  end
-
-  create_table "student_skill_levels", force: :cascade do |t|
-    t.integer "student_id"
-    t.integer "skill_level_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -89,5 +86,4 @@ ActiveRecord::Schema.define(version: 20180107215207) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "proficiency_levels", "skill_levels", column: "skill_levels_id"
 end

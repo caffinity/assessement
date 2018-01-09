@@ -4,17 +4,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'pages#index'
   resources :classrooms
-  resources :students
 
-
-  resources :subjects do
-    resources :skills, shallow: true do
-      resources :skilllevels, shallow: true do
-        resources :proficiencylevels, shallow: true do
-          resources :achievements
-        end
-      end
-    end
+  resources :students, shallow: true do
+    resources :skilllevels
   end
-
+  resources :subjects, :skills, :proficiencylevels
 end

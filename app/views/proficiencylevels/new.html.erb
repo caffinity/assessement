@@ -9,7 +9,7 @@
   <%= form_for(@proficiency_level, url: skilllevel_proficiencylevels_path(@skill_level.id)) do |f| %>
     <%= f.text_field :level %>
     <%= f.text_area :statement %>
-    <%= f.hidden_field(:skill_levels, value: @skill_level.id) %>
+    <%= f.hidden_field(:skill_level_id, value: @skill_level.id) %>
 
     <%= f.submit %>
   <% end %>

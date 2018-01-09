@@ -1,6 +1,5 @@
 class SkillLevel < ApplicationRecord
-  has_many :student_skill_levels
-  has_many :proficiency_levels
-	has_one :student, through: :student_skill_levels
+  belongs_to :proficiency_level
+	belongs_to :student
 	belongs_to :skill
 end

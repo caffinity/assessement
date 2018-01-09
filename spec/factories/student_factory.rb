@@ -9,8 +9,13 @@ FactoryBot.define do
     special_education_need  { Faker::Lorem.words.join(' ') }
     year                    { (1..7).to_a.sample           }
 
+
     trait :with_classroom do
       classroom
+    end
+
+    trait :with_skill_level do
+      skill_levels{ build_list(:skill_level, 8, :with_proficiency_level, student: student)}
     end
   end
 end
