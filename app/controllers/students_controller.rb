@@ -14,11 +14,19 @@ class StudentsController < ApplicationController
 
 	def show
 		@student = Student.find(params[:id])
+    @pie_chart_values = @student.skill_levels.each_with_object({}) do |skill_level, hash|
+      name = [
+        skill_level.proficiency_level.skill.name, # => reading
+        ' p',
+        skill_level.proficiency_level.level # => 5
+      ].join
+      hash[view_context.link_to(name, skill_level_path(skill_level))] = 1
+    end
 	end
 
 	def edit
 	end
-  
+
 	def create
 		@student = Student.new(student_params)
 		if @student.save
@@ -36,6 +44,7 @@ class StudentsController < ApplicationController
 	  private
 
 	def set_student
+    binding.pry
     @student = Student.find(params[:id])
   end
 
