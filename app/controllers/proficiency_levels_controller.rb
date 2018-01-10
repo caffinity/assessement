@@ -1,7 +1,7 @@
-class ProficiencylevelsController < ApplicationController
+class ProficiencyLevelsController < ApplicationController
 
   def show
-    @proficiency
+    @proficiency_level = ProficiencyLevel.find(params[:id])
   end
 
 

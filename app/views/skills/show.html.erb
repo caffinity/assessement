@@ -4,14 +4,14 @@
   <table class="ui very compact table">
     <thead>
       <tr>
-        <th>Skill Level     </th>
+        <th>ProficiencyLevel    </th>
         <th>Statement	  		</th>
       </tr>
     </thead>
-    <% @proficiency_level.each do |skill_level| %>
+    <% @proficiency_level.each do |proficiency_level| %>
       <tr>
-        <td><%= link_to skill_level.level, skill_level_path(skill_level) %> </td>
-        <td><%= skill_level.statement %></td>
+        <td><%= link_to("P#{proficiency_level.level}", proficiency_level_path(proficiency_level), :class => 'ui inverted green button') %> </td>
+        <td><%= proficiency_level.statement %></td>
       </tr>
     <% end %>
   </table>

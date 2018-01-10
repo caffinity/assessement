@@ -1,8 +1,8 @@
 class SkillsController < ApplicationController
 
   def show
-      @subject = Skill.find(params[:id]).subject_id
       @skill = Skill.find(params[:id])
+      @subject = @skill.subject
       @proficiency_level = ProficiencyLevel.where(skill_id: @skill.id)
   end
 
@@ -12,12 +12,13 @@ class SkillsController < ApplicationController
 
   def new
     @skill = Skill.new
-    @subject = Subject.find(params[:subject_id])
+    
+
   end
 
   def create
-    @subject = Subject.find(params[:subject_id])
     @skill = Skill.new(skills_params)
+    @subject = @skill.subject
     if @skill.save
       redirect_to subject_path(@subject)
     else
