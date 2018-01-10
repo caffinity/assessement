@@ -38,7 +38,11 @@
 				<h1 class="ui center aligned container ">
 					<%= @student.first_name %> <%= @student.last_name %>
 				</h1>
-				<%= pie :pie_chart, @pieSize, @pieData.to_json %>
+
+        <%= pie :pie_chart, @pieSize, @pieData.to_json %>
+        <%= pie_chart @pieData, donut: true %>
+
+       <div id="donut_single" data-ruby="<%= @pieData %>" style="width: 900px; height: 500px;"></div>
 		</div>
 		<div class="ui raised segment">
 			<h4 class="ui header center aligned">Student Notes</h4>

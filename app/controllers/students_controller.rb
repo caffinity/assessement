@@ -20,17 +20,21 @@ class StudentsController < ApplicationController
           ' p',
           skill_level.proficiency_level.level # => 5
                 ].join
-        hash[view_context.link_to(name, skill_level_path(skill_level))] = 1
+        hash[name] = 1
       end
+
       @pieData = @student.skill_levels.each_with_object([]) do |skill_level, arr|
         arr << {  value: 1,
                   color: skill_level.proficiency_level.skill.color,
                   highlight: "#FF5A5E",
-                  label:  view_context.link_to(skill_level.proficiency_level.skill.name, skill_level_path(skill_level))
+                  label: skill_level.proficiency_level.skill.name
                 }
+
       end
+
       @pieSize = {:height => 300,
                   :width  => 300}
+
 	end
 
 	def edit
