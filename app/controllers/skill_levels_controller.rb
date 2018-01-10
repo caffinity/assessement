@@ -1,13 +1,15 @@
-class SkilllevelsController < ApplicationController
+class SkillLevelsController < ApplicationController
 
   def show
     @skill_level = SkillLevel.find(params[:id])
+    @listening = SkillLevel.where(student_id: :id)
+    @reading
+
   end
 
   def new
-    @skill          = Skill.find(params[:skill_id])
     @skill_level    = SkillLevel.new()
-    @students       = Student.all
+    @student      = Student.find(params[:student_id])
   end
 
   def create

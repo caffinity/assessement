@@ -4,12 +4,14 @@
       <p>
 
 
+<!-- SkillLevel(statement: string, student_id: integer, proficiency_level_id: integer) -->
+  <%= form_for(@skill_level, url: student_skill_levels_path(@student)) do |f| %>
 
-  <%= form_for(@skill_level, url: skill_skilllevels_path(@skill)) do |f| %>
-    <%= f.text_field :level %>
     <%= f.text_area :statement %>
-    <%= f.hidden_field(:skill_id, :value => @skill.id) %>
+    <%= f.hidden_field(:student_id, :value => @student.id) %>
     <%= f.submit %>
+
+
   <% end %>
         This is where the form for creating new skill levels will go.
       </p>
