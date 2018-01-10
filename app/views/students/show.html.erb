@@ -38,16 +38,7 @@
 				<h1 class="ui header center aligned">
 					<%= @student.first_name %> <%= @student.last_name %>
 				</h1>
-					<%= pie_chart({ "#{@student.first_name}" => 1,
-														"Listening P7" => 1,
-														"Writing P3" => 1,
-														"Speaking P3" => 1,
-														"Numbers P8" => 1,
-														"Shapes and Measures P4" => 1,
-														"Geometry P3" => 1,
-														"Space & stuff P3" => 1,
-                            
-													}) %>
+				<%= pie_chart(@pie_chart_values) %>
 		</div>
 		<div class="ui raised segment">
 			<h4 class="ui header center aligned">Student Notes</h4>
