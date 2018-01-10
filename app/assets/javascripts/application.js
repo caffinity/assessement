@@ -16,7 +16,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-
-
-
-
+//= require turbolinks
+//= require chart
+//= require nvd3
+//= require google

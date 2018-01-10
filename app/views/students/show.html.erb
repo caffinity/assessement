@@ -35,10 +35,10 @@
 		    	<%= @student.special_education_need %>
 		    </div>
 		  </div>
-				<h1 class="ui header center aligned">
+				<h1 class="ui center aligned container ">
 					<%= @student.first_name %> <%= @student.last_name %>
 				</h1>
-				<%= pie_chart(@pie_chart_values) %>
+				<%= pie :pie_chart, @pieSize, @pieData.to_json %>
 		</div>
 		<div class="ui raised segment">
 			<h4 class="ui header center aligned">Student Notes</h4>
