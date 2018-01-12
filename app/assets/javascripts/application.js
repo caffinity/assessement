@@ -12,31 +12,7 @@
 //
 
 //= require chartkick
-//= require highcharts.js
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
 //= require turbolinks
-//= require chart
-//= require nvd3
-//= require google
-
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-
-function drawChart() {
-  var rubyData = $('pieData').data('ruby')
-  var data = google.visualization.arrayToDataTable([rubyData]);
-
-  var options = {
-    pieHole: 0.5,
-    pieSliceText: 'label',
-    pieSliceTextStyle: {
-      color: 'black',
-    },
-    legend: 'none'
-  };
-
-  var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
-  chart.draw(data, options);
-}

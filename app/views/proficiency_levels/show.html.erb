@@ -1,3 +1,6 @@
 <div class="ui container">
   <h1 class="ui header center aligned"><%= @proficiency_level.skill.name %> P<%= @proficiency_level.level %></h1>
 </div>
+
+
+<%= link_to "New Achievement", new_proficiency_level_achievement_path(@proficiency_level.id) %>

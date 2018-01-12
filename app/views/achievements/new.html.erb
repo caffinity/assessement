@@ -1,0 +1,12 @@
+<div class="ui container center aligned">
+  <h1>New Acheivement for
+    <%= @proficiency_level.skill.name %>
+    P<%= @proficiency_level.level %>
+  </h1>
+    <%= form_for(@achievement, url:proficiency_level_achievements_path(@proficiency_level)) do |f| %>
+      name
+      <%= f.text_field :name %>
+      Achievement
+      <%= f.text_area :achievement %>
+    <% end %>
+</div>

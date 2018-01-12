@@ -39,10 +39,9 @@
 					<%= @student.first_name %> <%= @student.last_name %>
 				</h1>
 
-        <%= pie :pie_chart, @pieSize, @pieData.to_json %>
-        <%= pie_chart @pieData, donut: true %>
 
-       <div id="donut_single" data-ruby="<%= @pieData %>" style="width: 900px; height: 500px;"></div>
+        <%= pie_chart @pie_Donut, donut: true %>
+
 		</div>
 		<div class="ui raised segment">
 			<h4 class="ui header center aligned">Student Notes</h4>

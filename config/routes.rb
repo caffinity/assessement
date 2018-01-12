@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   resources :students, shallow: true do
     resources :skill_levels
   end
-  resources :subjects, :skills, :proficiency_levels
+  resources :subjects, :skills
+  resources :proficiency_levels, shallow: true do
+    resources :achievements
+  end 
 end

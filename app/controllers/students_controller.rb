@@ -14,28 +14,34 @@ class StudentsController < ApplicationController
 
 	def show
 		@student = Student.find(params[:id])
-    @pie_chart_values = @student.skill_levels.each_with_object({}) do |skill_level, hash|
-        name = [
-          skill_level.proficiency_level.skill.name, # => reading
-          ' p',
-          skill_level.proficiency_level.level # => 5
-                ].join
-        hash[name] = 1
-      end
+    
+    # @pie_chart_values = @student.skill_levels.each_with_object({}) do |skill_level, hash|
+    #     name = [
+    #       skill_level.proficiency_level.skill.name, # => reading
+    #       ' p',
+    #       skill_level.proficiency_level.level # => 5
+    #             ].join
+    #     hash[name] = 1
+    # end
 
-      @pieData = @student.skill_levels.each_with_object([]) do |skill_level, arr|
-        arr << {  value: 1,
-                  color: skill_level.proficiency_level.skill.color,
-                  highlight: "#FF5A5E",
-                  label: skill_level.proficiency_level.skill.name
-                }
+    @pie_Donut = @student.skill_levels.each_with_object({}) do |skill_level, hash|
+      hash[skill_level.proficiency_level.skill.name] = 1
 
-      end
+    end
 
-      @pieSize = {:height => 300,
+    # @pieData = @student.skill_levels.each_with_object([]) do |skill_level, arr|
+    #     arr << {  value: 1,
+    #               color: skill_level.proficiency_level.skill.color,
+    #               highlight: "#FF5A5E",
+    #               label: skill_level.proficiency_level.skill.name
+    #             }
+    # end
+
+    @pieSize = {:height => 300,
                   :width  => 300}
+  end
 
-	end
+
 
 	def edit
 	end
