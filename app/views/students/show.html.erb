@@ -38,9 +38,21 @@
 				<h1 class="ui center aligned container ">
 					<%= @student.first_name %> <%= @student.last_name %>
 				</h1>
-
-
-        <%= pie_chart @pie_Donut, donut: true %>
+        <%= pie_chart @pie_data, donut: true, adapter: 'google'  %>
+        <script>
+        google.charts.setOnLoadCallback(setupChart);
+  function setupChart() {
+    var chartWrapper = Chartkick.charts["chart-1"]
+    var chart = chartWrapper.chart
+    var data = chartWrapper.data
+    google.visualization.events.addListener(chart, 'select', function() {
+      selection = chart.getSelection()
+      if(selection && selection[0]) {
+        window.location.href = data[selection[0].row][0];
+      }
+    });
+  }
+        </script>
 
 		</div>
 		<div class="ui raised segment">
