@@ -8,5 +8,8 @@
       <%= f.text_field :name %>
       Achievement
       <%= f.text_area :achievement %>
+      <%= f.hidden_field(:proficiency_level_id, :value => @proficiency_level.id ) %>
+      <%= f.check_box :achieved, :class => "ui toggle checkbox" %>
+      <%= f.submit %>
     <% end %>
 </div>

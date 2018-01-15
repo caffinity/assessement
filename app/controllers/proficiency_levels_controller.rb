@@ -2,6 +2,8 @@ class ProficiencyLevelsController < ApplicationController
 
   def show
     @proficiency_level = ProficiencyLevel.find(params[:id])
+    @achievement = Achievement.where(proficiency_level_id: @proficiency_level.id)
+    
   end
 
 
@@ -13,11 +15,11 @@ class ProficiencyLevelsController < ApplicationController
   def create
     @skill_level = SkillLevel.find(params[:skilllevel_id])
     @proficiency_level = ProficiencyLevel.new(proficiency_level_params)
-    binding.pry
+
     if @proficiency_level.save
       redirect_to proficiencylevel_path(@proficiency_level)
     else
-      binding.pry
+
     end
   end
 
