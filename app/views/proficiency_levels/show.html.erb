@@ -1,6 +1,46 @@
-<div class="ui container">
-  <h1 class="ui header center aligned"><%= @proficiency_level.skill.name %> P<%= @proficiency_level.level %></h1>
+<div class="ui container center aligned">
+  <h1 class="ui header center aligned">
+    <%= @proficiency_level.skill.name %>
+    P
+    <%= @proficiency_level.level %>
+  </h1>
 </div>
-
-
-<%= link_to "New Achievement", new_proficiency_level_achievement_path(@proficiency_level.id) %>
+  <%= link_to "New Achievement",
+  new_proficiency_level_achievement_path(@proficiency_level.id)
+  %>
+    <div class="ui grid center aligned">
+      <div class="one wide column"></div>
+        <div class="eight wide column">
+          <div class="ui raised segment">
+            <% @achievement.where(:achieved => false).each do |achievement| %>
+              <div class="ui segment left aligned">
+                <%= achievement.name         %>
+                <%= achievement.achievement  %>
+                <%= achievement.id           %>
+                  <%= form_for achievement do |f| %>
+                    <div class="ui right floated slider checkbox">
+                       <%= f.check_box :achieved    %>
+                       <%= f.label "achieved?"      %>
+                     </div>
+                  </div>
+                <% end %>
+              <% end %>
+          </div>
+          <div class="ui divider">
+            <% @achievement.where(:achieved => true).each do |achievement| %>
+              <div class="ui raised segment left aligned">
+                <%= achievement.name %>
+                <%= achievement.achievement %>
+                <%= achievement.id %>
+                  <%= form_for achievement do |f| %>
+                    <div class="ui checkbox">
+                      <%= f.check_box :achieved %>
+                      <%= f.label :remember_me, "Angemeldet bleiben?" %>
+                    </div>
+                  <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <div class="two wide column"></div>
+    </div>
