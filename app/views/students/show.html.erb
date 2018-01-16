@@ -1,65 +1,57 @@
 <div class="ui container">
-		<div class="ui segment">
-		  <div class="ui left very close rail">
-		    <div class="ui segment">
-		      <%= link_to "Return to Class", classroom_path(@student.classroom),
-		      						:class => 'ui massive inverted green button center aligned' %>
-		    </div>
-		    <div class="ui segment">
-		    	<h1 class="ui header center aligned"> Grade <%= @student.year %></h1>
+	<div class="ui segment">
+<!-- LEFT RAIL Begins here. -->
+	  <div class="ui left very close rail">
+	    <div class="ui segment">
+	      <%= link_to "Return to Class", classroom_path(@student.classroom),
+	      						:class => 'ui massive inverted green button center aligned' %>
+	    </div>
+	    <div class="ui segment">
+	    	<h1 class="ui header center aligned"> Grade <%= @student.year %></h1>
+	    </div>
+	  </div>
 
-		    </div>
-		  </div>
+<!-- Right RAIL Begins here. -->
+	  <div class="ui right very close rail">
+	    <div class="ui segment">
+	    	<%= link_to "Update Student",
+            edit_student_path,
+	    			:class => 'ui massive inverted blue button'
+        %>
+	    </div>
+      <%= render 'free_school_meals_segment' %>
+      <%= render 'gender_segment' %>
+      <div class="ui segment">
+	    	<h3 class="ui header"> SEN </h3>
+  	      <%= @student.special_education_need %>
+      </div>
+	  </div>
 
-		  <div class="ui right very close rail">
-		    <div class="ui segment">
-		    	<%= link_to "Update Student", edit_student_path,
-		    			:class => 'ui massive inverted blue button' %>
-		    </div>
-		    <div class="ui segment">
-		      <% if @student.gender? %>
-		      <h1><i class="male icon"></i>Male</h1>
-		      <% else %>
-		      <h1><i class="female icon"></i>Female</h1>
-		      <% end %>
-		    </div>
-		    <div class="ui segment">
-		      <% if @student.free_school_meals? %>
-		      	<h1><i class="food icon"></i>Yes</h1>
-		      <% else %>
-		      	<h4><i class="remove icon"></i>No Free School Meals</h4>
-		      <% end %>
-		    </div>
-		    <div class="ui segment">
-		    	<h3 class="ui header"> SEN </h3>
-		    	<%= @student.special_education_need %>
-		    </div>
-		  </div>
-				<h1 class="ui center aligned container ">
-					<%= @student.first_name %> <%= @student.last_name %>
-				</h1>
-        <%= pie_chart @pie_data, donut: true, adapter: 'google'  %>
-        <script>
+<!-- Central RAIL Begins here. -->
+  <h1 class="ui center aligned container ">
+    <%= @student.first_name %> <%= @student.last_name %>
+  </h1>
+    <%= pie_chart @pie_data, donut: true, adapter: 'google'  %>
+      <script>
         google.charts.setOnLoadCallback(setupChart);
-  function setupChart() {
-    var chartWrapper = Chartkick.charts["chart-1"]
-    var chart = chartWrapper.chart
-    var data = chartWrapper.data
-    google.visualization.events.addListener(chart, 'select', function() {
-      selection = chart.getSelection()
-      if(selection && selection[0]) {
-        window.location.href = data[selection[0].row][0];
-      }
-    });
-  }
-        </script>
-
-		</div>
-		<div class="ui raised segment">
-			<h4 class="ui header center aligned">Student Notes</h4>
-			<p class="ui center aligned">
-				Student notes go here.
-			</p>
-			<h5 class="ui header center aligned">Add new Student Note</h5>
-		</div>
+        function setupChart() {
+          var chartWrapper = Chartkick.charts["chart-1"]
+          var chart = chartWrapper.chart
+          var data = chartWrapper.data
+          google.visualization.events.addListener(chart, 'select', function() {
+            selection = chart.getSelection()
+            if(selection && selection[0]) {
+              window.location.href = data[selection[0].row][0];
+            }
+          });
+        }
+      </script>
+    </div>
+  <div class="ui raised segment">
+    <h4 class="ui header center aligned">Student Notes</h4>
+      <p class="ui center aligned">
+        Student notes go here.
+      </p>
+    <h5 class="ui header center aligned">Add new Student Note</h5>
+  </div>
 </div>
