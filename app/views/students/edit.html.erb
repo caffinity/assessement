@@ -1,0 +1,96 @@
+<div class="ui container">
+  <div class="ui raised segment">
+    <%= form_for :student do |form| %>
+    <div class="ui center aligned grid">
+      <div class="four column row">
+        <div class="left floated column">
+          <div class="ui raised segment">
+          <%= render 'free_school_meals_segment' %>
+          <h3 class="ui header">
+            Free School Meals
+          </h3>
+          <%= form.select(:free_school_meals, options_for_select([
+            ["Yes", true],
+            ["No", false]]),
+            {prompt: 'Does the Student recieve Free School Meals? (FSM)'},
+            {:class=>'ui simple dropdown item'})
+          %>
+          </div>
+        </div>
+        <div class="eight wide column">
+          <h3 class="ui header">First name <%= form.text_field :first_name %>
+          <h3 class="ui header">Last name <%= form.text_field :last_name %>
+          <h3 class="ui header">Class </h3>
+            <%= form.select(:classroom_id,
+            options_for_select(Classroom.all.pluck(:name, :id)),
+            :class => 'ui simple dropdown item' )
+            %>
+        </div>
+        <div class="right floated column">
+          <h3 class="ui header">
+            English As Second Language
+          </h3>
+          <%= form.select(:english_as_language, options_for_select([
+            ["Yes", true],
+            ["No", false]]),
+            {prompt: 'English as second language?'},
+            {:class=>'ui simple dropdown item'})
+          %>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="four wide column">
+          <div class="ui raised segment">
+            <%= render 'pupil_premium' %>
+              <h3 class="ui header">Pupil Premium </h3>
+                <%= form.select(:pupil_premium, options_for_select([
+                  ["Yes", true],
+                  ["No", false]]),
+                  {prompt: 'Qualify for pupil premium?'},
+                  {:class=>'ui simple dropdown item'})
+                %>
+          </div>
+        </div>
+        <div class="eight wide column">
+
+          <h3 class="ui header">Gender </h3>
+          <%= form.select(:gender, options_for_select([
+            ["Male", true],
+            ["Female", false]]),
+            {prompt: 'Select Gender'},
+            {:class=>'ui simple dropdown item'})
+          %>
+            
+            <div class="ui divider"></div>
+        </div>
+        <div class="four wide column">
+          <h3 class="ui header">Grade
+            <%= form.select(:year, options_for_select([
+              ["Grade 1", 1],
+              ["Grade 2", 2],
+              ["Grade 3", 3],
+              ["Grade 4", 4],
+              ["Grade 5", 5],
+              ["Grade 6", 6],
+              ["Grade 7", 7],
+              ["Grade 8", 8],
+              ]),
+              {prompt: 'Student Grade?'},
+              {:class=>'ui simple dropdown item'})
+            %>
+      </div>
+
+
+
+
+
+
+
+
+<%= form.submit 'Update Student', :class => 'ui green button' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

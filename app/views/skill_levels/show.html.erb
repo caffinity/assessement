@@ -1,27 +1,46 @@
-<h1>showing the Skill level for </h1>
 
-
-
-<table class="ui very compact table">
-  <thead>
-    <tr>
-      <th> Skill Level</th>
-      <th> Statement  </th>
-      <th> Skill Id   </th>
-      <th> Skill Name </th>
-      <th> Subject Name </th>
-    </tr>
-  </thead>
-    <td> <%= @skill_level.level %>             </td>
-    <td><%= @skill_level.statement %>          </td>
-    <td><%= @skill_level.skill_id %>           </td>
-    <td><%= @skill_level.skill.name %>         </td>
-    <td><%= @skill_level.skill.subject.name %> </td>
-</table>
 <%= link_to 'Back', :back, :class => 'ui inverted green button' %>
-<%= link_to "Return to #{@skill_level.skill.name}",
-            skill_path(@skill_level.skill_id),
-            :class => 'ui inverted green button' %>
-<%= link_to 'New Proficiency Level',
-            new_skilllevel_proficiencylevel_path(@skill_level),
-            :class => 'ui inverted green button' %>
+<%= link_to "View other #{@skill_level.proficiency_level.skill.name.capitalize} Levels",
+          skill_path(@skill_level.proficiency_level.skill_id),
+          :class => 'ui inverted green button' %>
+  <h1 class="ui header center aligned"> P<%= @level %> <%= @name %></h1>
+
+  <div class="ui grid center aligned">
+    <div class="one wide column"></div>
+      <div class="eight wide column">
+        <div class="ui raised segment">
+          <% @achievement.where(:achieved => false).each do |achievement| %>
+            <div class="ui segment left aligned">
+              <%= achievement.name         %>
+              <%= achievement.achievement  %>
+                <%= form_for achievement do |f| %>
+                  <div class="ui inverted toggle checkbox">
+                     <%= f.check_box :achieved    %>
+                     <%= f.label " "      %>
+                   </div>
+                </div>
+              <% end %>
+            <% end %>
+        </div>
+        <div class="ui divider">
+          <% @achievement.where(:achieved => true).each do |achievement| %>
+            <div class="ui raised segment left aligned">
+              <%= achievement.name %>
+              <%= achievement.achievement %>
+              <%= achievement.id %>
+                <%= form_for achievement do |f| %>
+                  <div class="ui toggle checkbox">
+                    <%= f.check_box :achieved %>
+                    <%= f.label :remember_me, "Angemeldet bleiben?" %>
+                  </div>
+                <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <div class="two wide column"></div>
+  </div>
+
+  <%= @skill_level.proficiency_level.skill.name %>
+  <%= @skill_level.proficiency_level.level %>
+  <%= @skill_level.proficiency_level.skill %>

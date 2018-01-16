@@ -3,7 +3,9 @@ class SkillLevelsController < ApplicationController
   def show
     @skill_level = SkillLevel.find(params[:id])
     @listening = SkillLevel.where(student_id: :id)
-    @reading
+    @achievement = Achievement.where(proficiency_level_id: @skill_level.proficiency_level_id)
+    @name = @skill_level.proficiency_level.skill.name
+    @level = @skill_level.proficiency_level.level
 
   end
 
