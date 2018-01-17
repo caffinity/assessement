@@ -37,6 +37,11 @@ class ProficiencyLevelsController < ApplicationController
     end
   end
 
+  def destroy
+    @proficiency_level = ProficiencyLevel.find(params[:id])
+    @proficiency_level.destroy
+  end
+
   private
 
   def proficiency_level_params

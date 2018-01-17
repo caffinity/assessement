@@ -6,12 +6,19 @@
       <tr>
         <th>ProficiencyLevel    </th>
         <th>Statement	  		</th>
+        <th></th>
       </tr>
     </thead>
     <% @proficiency_level.each do |proficiency_level| %>
       <tr>
         <td><%= link_to("P#{proficiency_level.level}", proficiency_level_path(proficiency_level), :class => 'ui inverted green button') %> </td>
         <td><%= proficiency_level.statement %></td>
+        <td> <%= link_to 'edit', edit_proficiency_level_path(proficiency_level),
+                 :class => 'ui mini button left floated' %>
+             <%= link_to 'Delete', proficiency_level_path(proficiency_level),
+                 method: :delete,
+                 data: { confirm: 'Are you sure?' },
+                 :class => 'ui mini red button right floated' %></td>
       </tr>
     <% end %>
   </table>
