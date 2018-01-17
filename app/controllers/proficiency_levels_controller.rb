@@ -3,7 +3,7 @@ class ProficiencyLevelsController < ApplicationController
   def show
     @proficiency_level = ProficiencyLevel.find(params[:id])
     @achievement = Achievement.where(proficiency_level_id: @proficiency_level.id)
-    
+
   end
 
 
@@ -18,6 +18,20 @@ class ProficiencyLevelsController < ApplicationController
 
     if @proficiency_level.save
       redirect_to proficiencylevel_path(@proficiency_level)
+    else
+
+    end
+  end
+
+  def edit
+    @proficiency_level = ProficiencyLevel.find(params[:id])
+  end
+
+
+  def update
+    @proficiency_level = ProficiencyLevel.find(params[:id])
+    if @proficiency_level.update(proficiency_level_params)
+      redirect_to @proficiency_level, notice: 'Level Updated'
     else
 
     end

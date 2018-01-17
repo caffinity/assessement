@@ -1,0 +1,13 @@
+<h1>Showing Proficiency Level / New page from the #Proficiency Controller</h1>
+
+
+
+
+
+  <%= form_for (@proficiency_level) do |f| %>
+    <%= f.text_field :level %>
+    <%= f.text_area :statement %>
+
+
+    <%= f.submit %>
+  <% end %>
