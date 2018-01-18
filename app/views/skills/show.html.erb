@@ -1,6 +1,7 @@
 <h1>Showing <%= @skill.name %></h1>
   <%= link_to 'Return to Subjects', subject_path(@subject), :class => 'ui green inverted button' %>
   <%= link_to 'New Skill Level', new_student_skill_level_path(@skill), :class => 'ui green inverted button' %>
+  <%= link_to 'back', :back, :class => 'ui green inverted button' %>
   <table class="ui very compact table">
     <thead>
       <tr>
