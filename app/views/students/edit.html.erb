@@ -1,6 +1,6 @@
 <div class="ui container">
   <div class="ui raised segment">
-    <%= form_for :student do |form| %>
+    <%= form_for(@student) do |form| %>
     <div class="ui center aligned grid">
       <div class="four column row">
         <div class="left floated column">
@@ -11,8 +11,8 @@
           </h3>
           <%= form.select(:free_school_meals, options_for_select([
             ["Yes", true],
-            ["No", false]]),
-            {prompt: 'Does the Student recieve Free School Meals? (FSM)'},
+            ["No", false]], @student.free_school_meals),
+            {prompt: 'select an option'},
             {:class=>'ui simple dropdown item'})
           %>
           </div>
@@ -22,7 +22,7 @@
           <h3 class="ui header">Last name <%= form.text_field :last_name %>
           <h3 class="ui header">Class </h3>
             <%= form.select(:classroom_id,
-            options_for_select(Classroom.all.pluck(:name, :id)),
+            options_for_select(Classroom.all.pluck(:name, :id),@student.classroom_id),
             :class => 'ui simple dropdown item' )
             %>
         </div>
@@ -32,7 +32,7 @@
           </h3>
           <%= form.select(:english_as_language, options_for_select([
             ["Yes", true],
-            ["No", false]]),
+            ["No", false]], @student.english_as_language),
             {prompt: 'English as second language?'},
             {:class=>'ui simple dropdown item'})
           %>
@@ -46,7 +46,7 @@
               <h3 class="ui header">Pupil Premium </h3>
                 <%= form.select(:pupil_premium, options_for_select([
                   ["Yes", true],
-                  ["No", false]]),
+                  ["No", false]], @student.pupil_premium),
                   {prompt: 'Qualify for pupil premium?'},
                   {:class=>'ui simple dropdown item'})
                 %>
@@ -57,11 +57,11 @@
           <h3 class="ui header">Gender </h3>
           <%= form.select(:gender, options_for_select([
             ["Male", true],
-            ["Female", false]]),
+            ["Female", false]], @student.gender),
             {prompt: 'Select Gender'},
             {:class=>'ui simple dropdown item'})
           %>
-            
+
             <div class="ui divider"></div>
         </div>
         <div class="four wide column">
@@ -75,7 +75,7 @@
               ["Grade 6", 6],
               ["Grade 7", 7],
               ["Grade 8", 8],
-              ]),
+              ], @student.year ),
               {prompt: 'Student Grade?'},
               {:class=>'ui simple dropdown item'})
             %>

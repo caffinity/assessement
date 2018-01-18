@@ -47,19 +47,20 @@ class StudentsController < ApplicationController
 
 
   def edit
-
+    @student = Student.find(params[:id])
   end
 
   def update
-    respond_to do |format|
+    @student = Student.find(params[:id])
+
       if @student.update(student_params)
-        
+        redirect_to student_path(@student)
       else
 
 
       end
-    end
   end
+
 
 	def create
 		@student = Student.new(student_params)
