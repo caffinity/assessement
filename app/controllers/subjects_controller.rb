@@ -2,8 +2,9 @@ class SubjectsController < ApplicationController
   before_action :authenticate_teacher!
 
   def index
-    @subject = Subject.all
+    @subjects = Subject.all
     @skills = Skill.all
+    @achievement = Achievement.all
   end
 
   def new
