@@ -5,11 +5,16 @@ Rails.application.routes.draw do
   root to: 'pages#index'
   resources :classrooms
 
+
+
   resources :students, shallow: true do
+    collection do
+        get 'view'
+    end
     resources :skill_levels
   end
   resources :subjects, :skills
   resources :proficiency_levels, shallow: true do
     resources :achievements
-  end 
+  end
 end

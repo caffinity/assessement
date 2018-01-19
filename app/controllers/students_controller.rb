@@ -12,6 +12,10 @@ class StudentsController < ApplicationController
 		@students = Student.new
 	end
 
+  def view
+    
+  end
+
 	def show
 		@student = Student.find(params[:id])
 
