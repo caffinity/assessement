@@ -12,8 +12,19 @@ class SkillsController < ApplicationController
 
   def new
     @skill = Skill.new
-    
+  end
 
+  def edit
+    @skill = Skill.find(params[:id])
+  end
+
+  def update
+    @skill = Skill.find(params[:id])
+    if @skill.update(skills_params)
+      redirect_to skill_path(@skill)
+    else
+      binding.pry
+    end
   end
 
   def create
@@ -38,6 +49,6 @@ class SkillsController < ApplicationController
   private
 
   def skills_params
-    params.require(:skill).permit(:name, :subject_id, :id)
+    params.require(:skill).permit(:name, :subject_id, :id, :color)
   end
 end

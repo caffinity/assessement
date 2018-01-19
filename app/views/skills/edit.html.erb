@@ -1,0 +1,10 @@
+<h1>Editing <%= @skill.subject.name.capitalize %>
+  <sub>
+  <%= @skill.name.capitalize %></sub></h1>
+
+<%= form_for @skill do |f| %>
+
+  <%= f.text_field :name %>
+  
+  <%= f.submit %>
+<% end %>
