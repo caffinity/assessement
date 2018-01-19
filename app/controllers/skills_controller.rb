@@ -7,6 +7,8 @@ class SkillsController < ApplicationController
   end
 
   def index
+      @subject = Subject.all
+      @skill = Skill.all
 
   end
 
