@@ -58,12 +58,6 @@
             <% @student.skill_levels.each do |student| %>
               <div class="five wide column center aligned">
                 <div class="ui segment center aligned" >
-                  <!-- <div class="ui circular segment center aligned">
-                    <h2 class="ui header center aligned">
-                      P<%= student.proficiency_level.level %>
-                      <div class="sub header">Mastered</div>
-                    </h2>
-                  </div> -->
                   <%= link_to "P#{student.proficiency_level.level}",
                   skill_level_path(student),
                   :class => 'ui inverted massive violet button center aligned' %>
