@@ -5,42 +5,51 @@
           :class => 'ui inverted green button' %>
   <h1 class="ui header center aligned"> P<%= @level %> <%= @name %></h1>
 
-  <div class="ui grid center aligned">
-    <div class="one wide column"></div>
+  <div class="ui grid middle left aligned">
+    <div class="four wide column"></div>
       <div class="eight wide column">
         <div class="ui raised segment">
-          <% @achievement.where(:achieved => false).each do |achievement| %>
-            <div class="ui segment left aligned">
-              <%= achievement.name         %>
-              <%= achievement.achievement  %>
+          <% @achievement.where(:achieved => false).shuffle.each do |achievement| %>
+          <div class="ui clearing segment">
+
+            <div class="ui left floated middle aligned segment">
+              <div class="ui toggle fitted checkbox">
                 <%= form_for achievement do |f| %>
-                  <div class="ui inverted toggle checkbox">
-                     <%= f.check_box :achieved    %>
-                     <%= f.label " "      %>
-                   </div>
-                </div>
-              <% end %>
-            <% end %>
-        </div>
-        <div class="ui divider">
-          <% @achievement.where(:achieved => true).each do |achievement| %>
-            <div class="ui raised segment left aligned">
+                <%= f.check_box :achieved %>
+                <input type="checkbox">
+                <label></label>
+                <% end %>
+              </div>
+            </div>
+            <p class="ui middle aligned right floated">
               <%= achievement.name %>
               <%= achievement.achievement %>
               <%= achievement.id %>
+          </div>
+          <% end %>
+        </div>
+
+
+        <div class="ui divider">
+          <% @achievement.where(:achieved => true).shuffle.each do |achievement| %>
+          <div class="ui clearing segment">
+
+            <div class="ui left floated middle aligned segment">
+              <div class="ui toggle fitted checkbox">
                 <%= form_for achievement do |f| %>
-                  <div class="ui toggle checkbox">
-                    <%= f.check_box :achieved %>
-                    <%= f.label :remember_me, "Angemeldet bleiben?" %>
-                  </div>
+                <%= f.check_box :achieved %>
+                <input type="checkbox">
+                <label></label>
                 <% end %>
+              </div>
             </div>
+            <p class="ui middle aligned right floated">
+              <%= achievement.name %>
+              <%= achievement.achievement %>
+              <%= achievement.id %>
+          </div>
           <% end %>
         </div>
       </div>
     <div class="two wide column"></div>
   </div>
-
-  <%= @skill_level.proficiency_level.skill.name %>
-  <%= @skill_level.proficiency_level.level %>
-  <%= @skill_level.proficiency_level.skill %>
