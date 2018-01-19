@@ -1,5 +1,9 @@
 class ProficiencyLevelsController < ApplicationController
 
+  def index
+
+  end 
+
   def show
     @proficiency_level = ProficiencyLevel.find(params[:id])
     @achievement = Achievement.where(proficiency_level_id: @proficiency_level.id)
