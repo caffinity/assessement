@@ -9,44 +9,41 @@ class StudentsController < ApplicationController
 	end
 
 	def new
-		@students = Student.new
+		@student = Student.new
+    @student.skill_levels.build
+
+    @proficiency_level = ProficiencyLevel.all
+    @skill = Skill.all
+    @skill_level_select = @skill.each_with_object([]) do |other, arr|
+        @proficiency_level.where(skill_id: other.id).each do |proficiency_level|
+          @name = "P#{proficiency_level.level} #{proficiency_level.skill.name.capitalize}"
+          arr << [@name, proficiency_level.id]
+      end
+
+    end
 	end
 
   def view
-    
+
   end
 
 	def show
 		@student = Student.find(params[:id])
-
-    # @pie_chart_values = @student.skill_levels.each_with_object({}) do |skill_level, hash|
-    #     name = [
-    #       skill_level.proficiency_level.skill.name, # => reading
-    #       ' p',
-    #       skill_level.proficiency_level.level # => 5
-    #             ].join
-    #     hash[name] = 1
-    # end
-
     @colors = []
     @pie_data = @student.skill_levels.each_with_object([]) do |skill_level, arr|
       name = [
-        skill_level.proficiency_level.skill.name, # => reading
-        ' P',
-        skill_level.proficiency_level.level # => 5
-      ].join
-      # Reading p5
-
+              skill_level.proficiency_level.skill.name, # => reading
+              ' P',
+              skill_level.proficiency_level.level # => 5
+             ].join  # Reading p5
       link = view_context.link_to(name, skill_level.proficiency_level)
       color = skill_level.proficiency_level.skill.color
-
       arr << [ name, 1 , link ]
       @colors << color
     end
 
     @pieSize = {:height => 300,
                 :width  => 300}
-
   end
 
 
@@ -71,8 +68,9 @@ class StudentsController < ApplicationController
 		if @student.save
 			redirect_to students_path
 		else
-			render 'show'
+      render 'show'
 		end
+    binding.pry
 	end
 
 	def destroy
@@ -95,7 +93,13 @@ class StudentsController < ApplicationController
 	  																		:pupil_premium,
 	  																		:english_as_language,
 	  																		:gender,
-	  																		:free_school_meals
+	  																		:free_school_meals,
+                                        skill_levels_attributes:
+                                        [
+                                          :student_id,
+                                          :proficiency_level_id,
+                                          :statement
+                                        ]
 	  																	)
 	  end
 	end
