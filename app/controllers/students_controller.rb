@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
 
 	def index
 		redirect_to new_classroom_path unless current_teacher.classroom || current_teacher.admin?
-		@students =	current_teacher.admin? ? Student.all : current_teacher.classroom
+		@students =	current_teacher.admin? ? Student.all : Student.where(classroom_id: current_teacher.classroom.id)
 	end
 
 	def new
@@ -51,7 +51,7 @@ class StudentsController < ApplicationController
 	def create
 		@student = Student.new(student_params)
 		if @student.save
-			redirect_to students_path
+			redirect_to subjects_path
 		else
       render 'show'
 		end
