@@ -29,21 +29,6 @@ class StudentsController < ApplicationController
 
 	def show
 		@student = Student.find(params[:id])
-    @colors = []
-    @pie_data = @student.skill_levels.each_with_object([]) do |skill_level, arr|
-      name = [
-              skill_level.proficiency_level.skill.name, # => reading
-              ' P',
-              skill_level.proficiency_level.level # => 5
-             ].join  # Reading p5
-      link = view_context.link_to(name, skill_level.proficiency_level)
-      color = skill_level.proficiency_level.skill.color
-      arr << [ name, 1 , link ]
-      @colors << color
-    end
-
-    @pieSize = {:height => 300,
-                :width  => 300}
   end
 
 
@@ -70,7 +55,6 @@ class StudentsController < ApplicationController
 		else
       render 'show'
 		end
-    binding.pry
 	end
 
 	def destroy

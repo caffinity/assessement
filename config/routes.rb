@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :pages
+  resources :pages do
+    collection do
+      get 'admin'
+  end
+end
+
   devise_for :teachers
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'pages#index'

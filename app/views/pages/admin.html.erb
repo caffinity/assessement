@@ -1,0 +1,48 @@
+<h1>showing admin</h1>
+
+
+<div class="ui clearing raised segment">
+  <table class="ui celled definition table">
+    <thead>
+      <tr>
+        <th>Admin?</th>
+        <th>Name</th>
+        <th>last signed in at</th>
+        <th>E-mail address</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @teachers.each do |teach| %>
+      <%= form_for(teach) do |form| %>
+
+    <tr>
+      <td></td>
+      <td><%= teach.first_name %> <%= teach.last_name %> </td>
+      <td><%= teach.last_sign_in_at %></td>
+      <td><%= teach.email %></td>
+      <td><%= form.check_box :admin %></td>
+    </tr>
+      <% end %>
+
+    </tbody>
+    <tfoot class="full-width">
+      <tr>
+        <th></th>
+        <th colspan="4">
+          <div class="ui right floated small primary labeled icon button">
+            <i class="user icon"></i> Add User
+          </div>
+          <div class="ui small button">
+            Approve
+          </div>
+          <div class="ui small  disabled button">
+            Approve All
+          </div>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+  <% end %>
+</div>

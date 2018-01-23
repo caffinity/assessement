@@ -41,10 +41,13 @@ class SkillsController < ApplicationController
 
   def destroy
     @skill = Skill.find(params[:id])
-    @skill.destroy
-    respond_to do |format|
+    if @skill.destroy
+      respond_to do |format|
       format.html { redirect_to subjects_path, notice: 'The Skill was was successfully destroyed.' }
       format.json { head :no_content }
+      render 'show'
+      end
+    else
     end
   end
 

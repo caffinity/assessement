@@ -15,20 +15,9 @@
   <% end %>
         This is where the form for creating new skill levels will go.
       </p>
-        <%= link_to "Back to #{@skill.name}", skill_url(@skill),
-            :class => 'ui inverted green button'%>
 
 
 
 
-            <% @students.each do |student| %>
-            <%= student.first_name %>
-            <%= student.last_name %>
-            <% end %>
-
-
-            <%= @skill.name %>
-            <%= @skill.id %>
-            <%= @skill.skill_levels.last %>
 
 </div>

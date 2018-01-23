@@ -12,6 +12,11 @@ class PagesController < ApplicationController
   def show
   end
 
+  def admin
+    @teachers = Teacher.all
+    @classroom = Classroom.all
+  end
+
   # GET /pages/new
   def new
     @page = Page.new
