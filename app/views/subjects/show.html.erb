@@ -3,7 +3,7 @@
     Showing <%= @subject.name %>
   </h1>
 
-  <%= link_to 'New Skill level', new_skill_path(@subject), :class => 'ui green inverted button' %>
+  <%= link_to 'New Skill level', new_skill_path(:subject_id => @subject.id), :class => 'ui green inverted button' %>
   <%= link_to 'Return', subjects_path, :class => 'ui green inverted button' %>
 
 

@@ -14,6 +14,7 @@ class SkillsController < ApplicationController
 
   def new
     @skill = Skill.new
+    @subject = Subject.find(params[:subject_id])
   end
 
   def edit

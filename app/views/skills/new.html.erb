@@ -1,6 +1,7 @@
 <h1>Showing Skills new</h1>
   <%= form_for @skill do |f| %>
     <%= f.text_field :name %>
+    <%= f.hidden_field(:subject_id, :value => @subject.id) %>
 
     <%= f.submit %>
   <% end %>
