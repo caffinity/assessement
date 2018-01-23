@@ -1,26 +1,36 @@
 <div class="ui container center aligned">
 	<h1>Welcome to <%= @classroom.name %> Class </h1>
-	<h4>This is <%= @classroom.teacher.first_name %>'s class</h4>
+	<h4>This is <%= @classroom.teacher.first_name.capitalize %>'s class</h4>
 	<div class="ui five wide special cards">
-		<% @students.each do |student| %>
-			<div class="card">
-		    <div class="image">
-		      <%= image_tag 'Pentland_square.png' %>
-		    </div>
-		    <div class="content">
-		      <%= link_to "#{student.first_name}
-				 #{student.last_name}", student_path(student), :class => 'ui header' %>
-		      <div class="meta">
-		        <span class="date"></span>
-		      </div>
-		    </div>
-		    <div class="extra content">
-		      <a>
-		        <i class="users icon"></i>
-		         Achieved % this term
-		      </a>
-		    </div>
-		  </div>
-		<% end %>
+  <% if @students_in_class %>
+    <% @students.each do |student| %>
+      <div class="card">
+        <div class="image">
+          <%= image_tag 'Pentland_square.png' %>
+        </div>
+        <div class="content">
+          <%= link_to "#{student.first_name}
+         #{student.last_name}", student_path(student), :class => 'ui header' %>
+          <div class="meta">
+            <span class="date"></span>
+          </div>
+        </div>
+        <div class="extra content">
+          <a>
+            <i class="users icon"></i>
+             Achieved % this term
+          </a>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+  <div class="ui raised segment">
+    <h1>Oh Dear... </h1>
+    <h5>You don't have any students.</h5>
+
+
+    <%= link_to "Add your first Student", new_student_path, :class => 'ui massive inverted green button' %>
+  </div>
+  <% end %>
 	</div>
 </div>

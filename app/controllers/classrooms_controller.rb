@@ -31,6 +31,7 @@ class ClassroomsController < ApplicationController
 
   def show
     @students = Student.where(classroom: @classroom)
+    @students_in_class = @students.nil?
   end
 
   def destroy
