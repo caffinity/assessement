@@ -8,7 +8,7 @@
 <!-- Left Rail Content Starts here -->
           <div class="ui left rail">
             <div class="ui segment">
-    
+
 
             </div>
           </div>
@@ -20,8 +20,10 @@
           </div>
           <div class="ui container center aligned">
             <%= link_to 'Classrooms', classrooms_path, :class => 'ui massive green button' %>
-            <div class="ui massive green button">Student Progress</div>
-            <div class="ui massive green button">Levels</div>
+            <% if teacher_signed_in? && current_teacher.admin? %>
+            <%= link_to 'Student Progress', students_path, :class => 'ui massive green button' %>
+            <% end %>
+            <%= link_to 'Subjects & Levels', subjects_path, :class => 'ui massive green button' %>
           </div>
           <p></p>
         </div>
