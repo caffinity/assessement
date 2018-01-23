@@ -1,1 +1,40 @@
-<h2> displaying classroom / new </h2>
+<h2> PointED Classrooms </h2>
+
+
+<div class="ui grid">
+  <div class="four wide column"></div>
+  <div class="eight wide column center aligned">
+    <h1>Ok! Lets created a class!</h1>
+    <p>
+      But before you do, please make sure you have created a teacher to teacher the class.
+      Unfortunately you will be unable to create a new class without the teacher to teach it.
+    </p>
+    <p>
+      so without further ado, let's create a class
+    </p>
+
+
+    <%= form_for @classroom do |f| %>
+
+    <div class="ui massive form">
+      <div class="inline field">
+        <label>We will call the class:</label>
+        <%= f.text_field :name, :class => 'inline field', placeholder: "Insert Genius here" %>
+      </div>
+
+
+
+    <h2>It will be taught by</h2>
+
+
+    <%= f.select(:teacher_id,
+        options_for_select(@teacher_list),
+        :class => 'ui search dropdown',
+        placeholder: "Select the teacher" )
+    %>
+    <div class="ui divider"> </div>
+    <%= f.submit :class => 'ui massive button' %>
+    <% end %>
+  </div>
+  <div class="four wide column"></div>
+</div>
