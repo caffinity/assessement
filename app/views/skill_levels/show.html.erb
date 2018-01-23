@@ -14,7 +14,7 @@
 
             <div class="ui left floated middle aligned segment">
               <div class="ui toggle fitted checkbox">
-                <%= form_for achievement do |f| %>
+                <%= form_for achievement, id: 'myForm' do |f| %>
                 <%= f.check_box :achieved %>
                 <input type="checkbox">
                 <label></label>
@@ -35,10 +35,10 @@
           <div class="ui clearing segment">
 
             <div class="ui left floated middle aligned segment">
-              <div class="ui toggle fitted checkbox">
-                <%= form_for achievement do |f| %>
+              <div class="ui toggle fitted green checkbox">
+                <%= form_for achievement, method: :put, id: 'myForm' do |f| %>
                 <%= f.check_box :achieved %>
-                <input type="checkbox">
+
                 <label></label>
                 <% end %>
               </div>
@@ -49,6 +49,15 @@
               <%= achievement.id %>
           </div>
           <% end %>
+          <script>
+            $(document).ready(function() {
+             $('#myBtn').on('click', function() {
+            $('#myForm').submit();
+            });
+            });
+          </script>
+          <button id="myBtn" class="positive ui button">Accept Checked</button>
+
         </div>
       </div>
     <div class="two wide column"></div>
