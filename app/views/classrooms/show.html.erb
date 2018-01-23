@@ -2,7 +2,15 @@
 	<h1>Welcome to <%= @classroom.name %> Class </h1>
 	<h4>This is <%= @classroom.teacher.first_name.capitalize %>'s class</h4>
 	<div class="ui five wide special cards">
-  <% if @students_in_class %>
+  <% if @students_in_class.empty? %>
+  <div class="ui raised segment">
+    <h1>Oh Dear... </h1>
+    <h5>You don't have any students.</h5>
+
+
+    <%= link_to "Add your first Student", new_student_path, :class => 'ui massive inverted green button' %>
+  </div>
+  <% else %>
     <% @students.each do |student| %>
       <div class="card">
         <div class="image">
@@ -23,14 +31,6 @@
         </div>
       </div>
     <% end %>
-  <% else %>
-  <div class="ui raised segment">
-    <h1>Oh Dear... </h1>
-    <h5>You don't have any students.</h5>
-
-
-    <%= link_to "Add your first Student", new_student_path, :class => 'ui massive inverted green button' %>
-  </div>
   <% end %>
 	</div>
 </div>

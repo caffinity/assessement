@@ -30,8 +30,11 @@ class ClassroomsController < ApplicationController
   end
 
   def show
-    @students = Student.where(classroom: @classroom)
-    @students_in_class = @students.nil?
+    @classroom = Classroom.find(params[:id])
+    @students = Student.where(classroom: @classroom.id)
+    @students_in_class =  @students.each do |students|
+      [] << students.first_name
+    end
   end
 
   def destroy
