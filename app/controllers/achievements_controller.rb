@@ -1,7 +1,7 @@
 class AchievementsController < ApplicationController
 
-def index
-end
+  def index
+  end
 
   def new
     @achievement = Achievement.new()
@@ -20,9 +20,17 @@ end
     end
   end
 
-private
+  def update
+    @achievement = Achievement.find(params[:id])
+    if @achievement.update(achievement_params)
+      redirect_to proficiency_level_path(@achievement.proficiency_level_id)
+    else
+      redirect_to subjects_path
+    end
+  end
+  private
 
-def achievement_params
-  params.require(:achievement).permit(:id, :name, :proficiency_level_id)
-end
+  def achievement_params
+    params.require(:achievement).permit(:id, :name, :proficiency_level_id, :achieved)
+  end
 end

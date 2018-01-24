@@ -26,6 +26,7 @@
                     <div class="ui right floated slider checkbox">
                        <%= f.check_box :achieved    %>
                        <%= f.label "achieved?"      %>
+                       <%= f.submit %>
                      </div>
                   </div>
                 <% end %>
@@ -40,7 +41,8 @@
                   <%= form_for achievement do |f| %>
                     <div class="ui checkbox">
                       <%= f.check_box :achieved %>
-                      <%= f.label :remember_me, "Angemeldet bleiben?" %>
+                      <%= f.label "Completed" %>
+                      <%= f.submit %>
                     </div>
                   <% end %>
               </div>
