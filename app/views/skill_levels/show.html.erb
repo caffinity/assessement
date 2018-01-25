@@ -34,8 +34,6 @@
 
         <div class="ui divider">
 
-              <%= @achievements.count(:conditions => { :achieved => true}) %>
-
 
           <% @achievements.where(:achieved => true).shuffle.each do |achievement| %>
           <div class="ui clearing segment">
