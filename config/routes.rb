@@ -16,10 +16,17 @@ end
     collection do
         get 'view'
     end
-    resources :skill_levels
+    resources :skill_levels do
+    end
+
   end
   resources :subjects, :skills
   resources :proficiency_levels, shallow: true do
-    resources :achievements
+    resources :achievements do
+      member do
+        patch 'student_achievement'
+      end
+
+    end
   end
 end

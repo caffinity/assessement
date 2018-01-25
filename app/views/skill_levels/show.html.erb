@@ -14,12 +14,14 @@
 
             <div class="ui left floated middle aligned segment">
               <div class="ui toggle fitted checkbox">
-                <%= form_for achievement, id: 'myForm' do |f| %>
-                <%= f.check_box :achieved %>
+                <%= form_for achievement, remote: true, url: student_achievement_achievement_path(achievement) do |f| %>
+
                 <input type="checkbox">
-                <label></label>
-                <% end %>
-              </div>
+                  <%= f.check_box :achieved %>
+                    <label></label>
+                </div>
+              <%= f.submit 'complete'%>
+              <% end %>
             </div>
             <p class="ui middle aligned right floated">
               <%= achievement.name %>
@@ -36,8 +38,9 @@
 
             <div class="ui left floated middle aligned segment">
               <div class="ui toggle fitted green checkbox">
-                <%= form_for achievement, method: :put, id: 'myForm' do |f| %>
+                <%= form_for achievement do |f| %>
                 <%= f.check_box :achieved %>
+                <%= f.submit %>
 
                 <label></label>
                 <% end %>

@@ -28,9 +28,21 @@ class AchievementsController < ApplicationController
       redirect_to subjects_path
     end
   end
+
+  def student_achievement
+    @achievement = Achievement.find(params[:id])
+    unless @achievement.update(achievement_params)
+      flash[:alert] = "Failed to update: @achievement.errors.full_messages"
+    end
+    render js: 'window.location.reload()'
+  end
+
   private
 
   def achievement_params
-    params.require(:achievement).permit(:id, :name, :proficiency_level_id, :achieved)
+    params.require(:achievement).permit(:id,
+                                        :name,
+                                        :proficiency_level_id,
+                                        :achieved)
   end
 end
