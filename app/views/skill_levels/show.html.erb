@@ -1,5 +1,6 @@
 
 <%= link_to 'Back', student_path(@skill_level.student_id), :class => 'ui inverted green button' %>
+<%= link_to '-- Refresh Page if complete doesnt submit --', skill_level_path(@skill_level.id), :class => 'ui red button right floated ' %>
   <h1 class="ui header center aligned"> P<%= @level %> <%= @name.capitalize %> Proficiency
   <div class="sub header">the <%= @name.capitalize %> Proficiency for <%= @skill_level.student.first_name %></div></h1>
 
@@ -11,9 +12,8 @@
           <div class="ui clearing segment">
 
             <div class="ui left floated middle aligned segment">
-              <div class="ui toggle fitted checkbox">
+              <div class="ui toggle fitted checkbox" data-no-turbolink="true">
                 <%= form_for achievement, remote: true, url: student_achievement_achievement_path(achievement) do |f| %>
-
                 <input type="checkbox">
                   <%= f.check_box :achieved %>
                     <label></label>
@@ -51,9 +51,10 @@
     </p>
     </div>
   <% end %>
+  <p> **Slight bug present with the complete button. If the page doesnt respond when you click it, Try refreshing the page.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="two wide column">  </div>
+<div class="two wide column"></div>
 </div>
