@@ -26,7 +26,7 @@ class SkillsController < ApplicationController
     if @skill.update(skills_params)
       redirect_to skill_path(@skill)
     else
-      binding.pry
+      
     end
   end
 

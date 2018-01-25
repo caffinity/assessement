@@ -15,7 +15,6 @@ class AchievementsController < ApplicationController
     if @achievement.save
       redirect_to proficiency_level_path(@proficiency_level.id)
     else
-      binding.pry
       render 'new'
     end
   end
