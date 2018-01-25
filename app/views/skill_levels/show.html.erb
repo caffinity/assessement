@@ -9,7 +9,7 @@
     <div class="four wide column"></div>
       <div class="eight wide column">
         <div class="ui raised segment">
-          <% @achievement.where(:achieved => false).shuffle.each do |achievement| %>
+          <% @achievements.where(:achieved => false).shuffle.each do |achievement| %>
           <div class="ui clearing segment">
 
             <div class="ui left floated middle aligned segment">
@@ -33,17 +33,22 @@
 
 
         <div class="ui divider">
-          <% @achievement.where(:achieved => true).shuffle.each do |achievement| %>
+
+              <%= @achievements.count(:conditions => { :achieved => true}) %>
+
+
+          <% @achievements.where(:achieved => true).shuffle.each do |achievement| %>
           <div class="ui clearing segment">
 
             <div class="ui left floated middle aligned segment">
               <div class="ui toggle fitted green checkbox">
-                <%= form_for achievement do |f| %>
-                <%= f.check_box :achieved %>
-                <%= f.submit %>
-
-                <label></label>
-                <% end %>
+                <%= form_for achievement, remote: true, url: student_achievement_achievement_path(achievement) do |f| %>
+                  <input type="checkbox">
+                    <%= f.check_box :achieved %>
+                      <label></label>
+                  </div>
+              <%= f.submit 'complete'%>
+              <% end %>
               </div>
             </div>
             <p class="ui middle aligned right floated">
@@ -52,16 +57,7 @@
               <%= achievement.id %>
           </div>
           <% end %>
-          <script>
-            $(document).ready(function() {
-             $('#myBtn').on('click', function() {
-            $('#myForm').submit();
-            });
-            });
-          </script>
-          <button id="myBtn" class="positive ui button">Accept Checked</button>
-
         </div>
       </div>
-    <div class="two wide column"></div>
+    <div class="two wide column">  </div>
   </div>
