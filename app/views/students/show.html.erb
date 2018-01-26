@@ -9,6 +9,7 @@
 	    <div class="ui segment">
 	    	<h1 class="ui header center aligned"> Grade <%= @student.year %></h1>
 	    </div>
+      <%= render 'pupil_premium' %>
 	  </div>
 
 <!-- Right RAIL Begins here. -->
@@ -32,24 +33,7 @@
     <%= @student.first_name %> <%= @student.last_name %>
   </h1>
   <div class="ui divider">
-
   </div>
-    <!-- <%= pie_chart @pie_data, donut: true, adapter: 'google'  %>
-      <script>
-        google.charts.setOnLoadCallback(setupChart);
-        function setupChart() {
-          var chartWrapper = Chartkick.charts["chart-1"]
-          var chart = chartWrapper.chart
-          var data = chartWrapper.data
-          google.visualization.events.addListener(chart, 'select', function() {
-            selection = chart.getSelection()
-            if(selection && selection[0]) {
-              window.location.href = data[selection[0].row][0];
-            }
-          });
-        }
-      </script> -->
-
     <div class="ui grid" >
       <div class="row">
         <div class="three wide column"></div>
@@ -57,15 +41,14 @@
           <div class="ui grid center aligned">
             <% @student.skill_levels.each do |student| %>
               <div class="five wide column center aligned">
-                <div class="ui segment center aligned" >
+
                   <%= link_to "P#{student.proficiency_level.level}",
                   skill_level_path(student),
-                  :class => 'ui inverted massive violet button center aligned' %>
+                  :class => 'ui massive standard button center aligned' %>
                   <h4>
               <%= student.proficiency_level.skill.name.capitalize %>
+                  </h4>
 
-            </h4>
-            </div>
           </div>
           <% end %>
 
