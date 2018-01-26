@@ -1,15 +1,12 @@
-
 <%= link_to 'Back', student_path(@skill_level.student_id), :class => 'ui inverted green button' %>
 <%= link_to '-- Refresh Page if complete doesnt submit --', skill_level_path(@skill_level.id), :class => 'ui red button right floated ' %>
   <h1 class="ui header center aligned"> P<%= @level %> <%= @name.capitalize %> Proficiency
   <div class="sub header">the <%= @name.capitalize %> Proficiency for <%= @skill_level.student.first_name %></div></h1>
-
   <div class="ui grid middle left aligned">
     <div class="four wide column"></div>
       <div class="eight wide column">
         <div class="ui raised segment">
           <% @achievements.where(:achieved => false).shuffle.each do |achievement| %>
-<<<<<<< HEAD
             <div class="ui clearing segment">
               <div class="ui right floated middle aligned segment">
                 <div class="ui toggle fitted checkbox" data-no-turbolink="true">
@@ -51,59 +48,4 @@
     <% end %>
       </div>
       <div class="two wide column">  <p> **Slight bug present with the complete button. If the page doesnt respond when you click it, Try refreshing the page.</p></div>
-
   </div>
-=======
-          <div class="ui clearing segment">
-
-            <div class="ui right floated middle aligned segment">
-              <div class="ui toggle fitted checkbox" data-no-turbolink="true">
-                <%= form_for achievement, remote: true, url: student_achievement_achievement_path(achievement) do |f| %>
-                <input type="checkbox">
-                  <%= f.check_box :achieved %>
-                    <label></label>
-                </div>
-              <%= f.submit 'Done', :class => 'ui small green button'%>
-              <% end %>
-            </div>
-            <p class="ui middle aligned right floated">
-              <i class="huge edit icon"></i>
-              <%= achievement.name %>
-              <%= achievement.achievement %>
-              <%= achievement.id %>
-            </p>
-          </div>
-          <% end %>
-        </div>
-
-
-<div class="ui divider"></div>
-  <% @achievements.where(:achieved => true).shuffle.each do |achievement| %>
-    <div class="ui clearing segment">
-      <div class="ui right floated middle aligned segment">
-        <div class="ui toggle fitted orange checkbox">
-          <%= form_for achievement, remote: true, url: student_achievement_achievement_path(achievement) do |f| %>
-          <input type="checkbox">
-          <%= f.check_box :achieved %>
-          <label></label>
-        </div>
-        <%= f.submit "uncomplete", :class => 'ui gray mini button' %>
-
-      <% end %>
-      </div>
-    <p class="ui middle aligned right floated">
-    <i class="huge checkmark box icon"></i>
-    <%= achievement.name %>
-    <%= achievement.achievement %>
-    <%= achievement.id %>
-    </p>
-    </div>
-  <% end %>
-  <p> **Slight bug present with the complete button. If the page doesnt respond when you click it, Try refreshing the page.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="two wide column"></div>
-</div>
->>>>>>> f24aba75338a187ccdc1ae99769a27cd9b21e5a1
