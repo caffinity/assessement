@@ -19,7 +19,6 @@ class StudentsController < ApplicationController
           @name = "P#{proficiency_level.level} #{proficiency_level.skill.name.capitalize}"
           arr << [@name, proficiency_level.id]
       end
-
     end
 	end
 
@@ -34,6 +33,12 @@ class StudentsController < ApplicationController
 
   def edit
     @student = Student.find(params[:id])
+    @proficiency_level = ProficiencyLevel.all
+    @skill = Skill.all
+    @skill_level_select = @student.skill_levels.each_with_object([]) do |skill, arr|
+        arr << skill
+
+      end
   end
 
   def update
