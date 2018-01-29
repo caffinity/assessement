@@ -1,18 +1,18 @@
 <%= form_for @student do |student| %>
     <h3 class="ui header">First name <%= student.text_field :first_name %>
     <h3 class="ui header">Last name <%= student.text_field :last_name %>
-    <h3 class="ui header">Grade (year)
+    <h3 class="ui header">Year Group (year)
   <%= student.select(:year, options_for_select([
-    ["Grade 1", 1],
-    ["Grade 2", 2],
-    ["Grade 3", 3],
-    ["Grade 4", 4],
-    ["Grade 5", 5],
-    ["Grade 6", 6],
-    ["Grade 7", 7],
-    ["Grade 8", 8],
+    ["Year Group 1", 1],
+    ["Year Group 2", 2],
+    ["Year Group 3", 3],
+    ["Year Group 4", 4],
+    ["Year Group 5", 5],
+    ["Year Group 6", 6],
+    ["Year Group 7", 7],
+    ["Year Group 8", 8],
     ]),
-    {prompt: 'Student Grade?'},
+    {prompt: 'Student Year Group?'},
     {:class=>'ui simple dropdown item'})
   %>
     <h3 class="ui header">Pupil Premium </h3>
