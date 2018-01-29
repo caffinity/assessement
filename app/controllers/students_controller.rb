@@ -34,9 +34,10 @@ class StudentsController < ApplicationController
   def edit
     @student = Student.find(params[:id])
     @proficiency_level = ProficiencyLevel.all
+    @achievement = Achievement.all
     @skill = Skill.all
     @skill_level_select = @student.skill_levels.each_with_object([]) do |skill, arr|
-        arr << skill
+        arr << skill.proficiency_level.id
 
       end
   end
