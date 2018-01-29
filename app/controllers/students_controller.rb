@@ -84,6 +84,7 @@ class StudentsController < ApplicationController
 	  																		:english_as_language,
 	  																		:gender,
 	  																		:free_school_meals,
+                                        :avatar,
                                         skill_levels_attributes:
                                         [
                                           :student_id,

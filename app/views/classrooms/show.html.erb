@@ -14,7 +14,11 @@
     <% @students.each do |student| %>
       <div class="card">
         <div class="image">
+          <% if student.avatar? %>
+          <%= image_tag student.avatar.url, :class => "ui medium circular image" %>
+          <% else %>
           <%= image_tag 'Pentland_square.png' %>
+          <% end %>
         </div>
         <div class="content">
           <%= link_to "#{student.first_name}

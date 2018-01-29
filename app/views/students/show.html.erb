@@ -29,9 +29,15 @@
 	  </div>
 
 <!-- Central RAIL Begins here. -->
+
+
   <h1 class="ui center aligned container ">
+
     <%= @student.first_name %> <%= @student.last_name %>
   </h1>
+  <% if @student.avatar? %>
+  <%= image_tag(@student.avatar.url, :class => "ui medium centered circular image") %>
+  <% end %>
   <div class="ui divider">
   </div>
     <div class="ui grid" >
