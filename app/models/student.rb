@@ -1,6 +1,6 @@
 class Student < ApplicationRecord
   require 'csv'
-  has_many :skill_levels
+  has_many :skill_levels, dependent: :destroy
   belongs_to :classroom
   accepts_nested_attributes_for :skill_levels #proficiency_level_id & #student_id Statement optional
 
