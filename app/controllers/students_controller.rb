@@ -6,6 +6,11 @@ class StudentsController < ApplicationController
 	def index
 		redirect_to new_classroom_path unless current_teacher.classroom || current_teacher.admin?
 		@students =	current_teacher.admin? ? Student.all : Student.where(classroom_id: current_teacher.classroom.id)
+    respond_to do |format|
+      format.html
+      format.csv { send_data @students.to_csv }
+      format.xls # { send_data @students.to_csv(col_sep: "\t") }
+    end
 	end
 
 	def new
