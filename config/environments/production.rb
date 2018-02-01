@@ -89,7 +89,11 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+<<<<<<< HEAD
   config.action_mailer.smtp_settings = {
+=======
+  ActionMailer::Base.smtp_settings = {
+>>>>>>> 26aebb0e948bdba8356c62d6d8c89e8b8ca37538
     :user_name => ENV["SENDGRID_USERNAME"],
     :password =>  ENV["SENDGRID_PASSWORD"],
     :domain => 'pointedapp.herokuapp.com',
