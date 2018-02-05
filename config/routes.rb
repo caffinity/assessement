@@ -17,6 +17,9 @@ end
         get 'view'
     end
     resources :skill_levels do
+      member do
+        get 'update_proficiency'
+      end
     end
 
   end
