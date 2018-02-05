@@ -9,27 +9,31 @@ class SkillLevelsController < ApplicationController
   end
 
   def new
-    @skill_level    = SkillLevel.new()
-    @student      = Student.find(params[:student_id])
+    @skill_level   = SkillLevel.new()
+    @student       = Student.find(params[:student_id])
   end
 
   def create
     @skill         = Skill.find(params[:skill_id])
-    @skill_level   = SkillLevel.new(skilllevel_params)
+    @skill_level   = SkillLevel.new(skill_level_params)
     if @skill_level.save
       redirect_to skilllevel_path(@skill_level)
+      create_skill_level_achievements
     else
-
       render 'index'
     end
   end
 
+  def update_proficiency
+    skill_level.level_up_proficiency! # Controller lets model do all of the hard work
+    redirect_to request.referrer
+  end
 
   private
   def skills_params
     params.require(:skill).permit(:name, :subject_id, :id)
   end
-  def skilllevel_params
+  def skill_level_params
     params.require(:skill_level).permit(:id, :level,  :statement, :skill_id)
   end
 
