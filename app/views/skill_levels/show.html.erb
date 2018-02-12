@@ -5,25 +5,36 @@
     <div class="four wide column"></div>
       <div class="eight wide column">
         <div class="ui raised segment">
-          <%= @skill_level.proficiency_level.achievement.count %>
-             <%= @skill_level.student.student_progress(@skill_level) %>
-
-
               <% @skill_level.proficiency_level.achievement.shuffle.each do |achievement| %>
                 <% student_achievement = @skill_level.student.has_achievement?(achievement) %>
                   <% if student_achievement.present? %>
                   <% else %>
                     <div class="ui clearing segment">
-
                       <i class="huge edit icon"></i>
                       <%= achievement.name %>
                       <%= link_to "Achieved", create_student_achievement_skill_level_path(:achievement => achievement.id), :class => 'ui green button right floated' %>
-
                     </div>
                   <% end %>
               <% end %>
           </div>
         <div class="ui divider"></div>
+        <%= content_tag :div, :class => 'ui big indicating progress', id: "progress",
+        data: {value: @skill_level.student.student_progress(@skill_level),
+               total: @skill_level.proficiency_level.achievement.count} do
+        %>
+          <div class="bar">
+            <div class="progress"></div>
+          </div>
+            <div class="label">Student Achievement for this Proficiency level</div>
+              <script charset="utf-8">
+                $('#progress').progress({
+                                          label: 'ratio',
+                                          text: {
+                                          ratio: 'Achieved {value} of {total} '
+                                          }
+                                        });
+              </script>
+        <% end %>
         <div class="ui clearing segment">
           <div class="ui raised segmenet">
             <% @skill_level.proficiency_level.achievement.shuffle.each do |achievement| %>
