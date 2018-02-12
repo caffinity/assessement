@@ -19,6 +19,9 @@ end
     resources :skill_levels do
       member do
         get 'update_proficiency'
+        get 'create_student_achievement'
+        get 'destroy_student_achievement'
+        get 'student_progress'
       end
     end
 

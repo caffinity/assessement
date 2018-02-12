@@ -18,7 +18,7 @@ class SkillLevel < ApplicationRecord
     private
 
   def create_skill_level_achievements!
-    proficiency_level.achievements.each do |achievement| # Create one for each prof_level achievement
+      proficiency_level.achievement.each do |achievement| # Create one for each prof_level achievement
       SkillLevelAchievement.create!(
         skill_level: self,
         achievement: achievement,

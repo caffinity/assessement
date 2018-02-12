@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180201213317) do
+ActiveRecord::Schema.define(version: 20180207185355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20180201213317) do
     t.string "achievement"
     t.boolean "achieved", default: false, null: false
     t.boolean "acheived", default: false, null: false
+    t.bigint "{:foreign_key=>true}_id"
+    t.index ["{:foreign_key=>true}_id"], name: "index_achievements_on_{:foreign_key=>true}_id"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -40,6 +42,15 @@ ActiveRecord::Schema.define(version: 20180201213317) do
     t.index ["skill_id"], name: "index_proficiency_levels_on_skill_id"
   end
 
+  create_table "skill_level_achievements", force: :cascade do |t|
+    t.string "achievement"
+    t.bigint "skill_level_id"
+    t.boolean "achieved", default: false, null: false
+    t.bigint "student_id"
+    t.index ["skill_level_id"], name: "index_skill_level_achievements_on_skill_level_id"
+    t.index ["student_id"], name: "index_skill_level_achievements_on_student_id"
+  end
+
   create_table "skill_levels", force: :cascade do |t|
     t.string "statement"
     t.bigint "student_id"
@@ -54,6 +65,13 @@ ActiveRecord::Schema.define(version: 20180201213317) do
     t.string "color"
   end
 
+  create_table "student_achievements", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "achievement_id"
+    t.index ["achievement_id"], name: "index_student_achievements_on_achievement_id"
+    t.index ["student_id"], name: "index_student_achievements_on_student_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -65,6 +83,8 @@ ActiveRecord::Schema.define(version: 20180201213317) do
     t.boolean "english_as_language"
     t.boolean "gender"
     t.string "avatar"
+    t.bigint "{:foreign_key=>true}_id"
+    t.index ["{:foreign_key=>true}_id"], name: "index_students_on_{:foreign_key=>true}_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -91,4 +111,8 @@ ActiveRecord::Schema.define(version: 20180201213317) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "skill_level_achievements", "skill_levels"
+  add_foreign_key "skill_level_achievements", "students"
+  add_foreign_key "student_achievements", "achievements"
+  add_foreign_key "student_achievements", "students"
 end

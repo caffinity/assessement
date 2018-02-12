@@ -14,14 +14,14 @@ class StudentsController < ApplicationController
 	end
 
 	def new
-		@student = Student.new
+		@student                  = Student.new
+    @proficiency_level        = ProficiencyLevel.all
+    @skill                    = Skill.all
     @student.skill_levels.build
-
-    @proficiency_level = ProficiencyLevel.all
-    @skill = Skill.all
     @skill_level_select = @skill.each_with_object([]) do |other, arr|
         @proficiency_level.where(skill_id: other.id).each do |proficiency_level|
-          @name = "P#{proficiency_level.level} #{proficiency_level.skill.name.capitalize}"
+          @name = "P#{proficiency_level.level}
+                    #{proficiency_level.skill.name.capitalize}"
           arr << [@name, proficiency_level.id]
       end
     end
@@ -33,6 +33,9 @@ class StudentsController < ApplicationController
 
 	def show
 		@student = Student.find(params[:id])
+    @student.skill_levels.each do |skill_level|
+    @student_achievements = [] << @student.skill_levels.first.proficiency_level.achievement
+    end
   end
 
 
@@ -62,7 +65,10 @@ class StudentsController < ApplicationController
 	def create
 		@student = Student.new(student_params)
 		if @student.save
-			redirect_to subjects_path
+			redirect_to student_path(@student)
+      binding.pry
+
+
 		else
       render 'show'
 		end

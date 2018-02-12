@@ -1,80 +1,80 @@
 <%= form_for @student do |form| %>
-
-
-
-    <h3 class="ui header">First name <%= form.text_field :first_name %>
-    <h3 class="ui header">Last name <%= form.text_field :last_name %>
-    <h3 class="ui header">Class </h3>
+#Names Selectors
+  <h3 class="ui header">First name <%= form.text_field :first_name %></h3>
+    <h3 class="ui header">Last name <%= form.text_field :last_name %></h3>
+      <h3 class="ui header">Student Avatar </h3>
+#avatar selector
       <div class="field">
         <%= form.label :avatar do %>
           <%= form.file_field :avatar %>
           <%= form.hidden_field :avatar_cache %>
         <% end %>
       </div>
-
-    <h3 class="ui header">Year Group (year)
-  <%= form.select(:year, options_for_select([
-    ["Year Group 1", 1],
-    ["Year Group 2", 2],
-    ["Year Group 3", 3],
-    ["Year Group 4", 4],
-    ["Year Group 5", 5],
-    ["Year Group 6", 6],
-    ["Year Group 7", 7],
-    ["Year Group 8", 8],
-    ]),
-    {prompt: 'Student Year Group?'},
-    {:class=>'ui simple dropdown item'})
-  %>
+#Year Group Dropdown
+    <h3 class="ui header">Year Group (year)</h3>
+      <%= form.select(:year, options_for_select([
+        ["Year Group 1", 1],
+        ["Year Group 2", 2],
+        ["Year Group 3", 3],
+        ["Year Group 4", 4],
+        ["Year Group 5", 5],
+        ["Year Group 6", 6],
+        ["Year Group 7", 7],
+        ["Year Group 8", 8],
+        ]),
+        {prompt: 'Student Year Group?'},
+        {:class=>'ui simple dropdown item'})%>
+#Pupil Premium Dropdown
     <h3 class="ui header">Pupil Premium </h3>
-  <%= form.select(:pupil_premium, options_for_select([
-    ["Yes", true],
-    ["No", false]]),
-    {prompt: 'Qualify for pupil premium?'},
-    {:class=>'ui simple dropdown item'})
-  %>
+      <%= form.select(:pupil_premium, options_for_select([
+        ["Yes", true],
+        ["No", false]]),
+        {prompt: 'Qualify for pupil premium?'},
+        {:class=>'ui simple dropdown item'})%>
+#FSM Dropdown
     <h3 class="ui header">Free School Meals </h3>
-  <%= form.select(:free_school_meals, options_for_select([
-    ["Yes", true],
-    ["No", false]]),
-    {prompt: 'Does the Student recieve Free School Meals? (FSM)'},
-    {:class=>'ui simple dropdown item'})
-  %>
+      <%= form.select(:free_school_meals, options_for_select([
+        ["Yes", true],
+        ["No", false]]),
+        {prompt: 'Does the Student recieve Free School Meals? (FSM)'},
+        {:class=>'ui simple dropdown item'})%>
+#EAL Dropdown
     <h3 class="ui header">EAL </h3>
-  <%= form.select(:english_as_language, options_for_select([
-    ["Yes", true],
-    ["No", false]]),
-    {prompt: 'English as second language?'},
-    {:class=>'ui simple dropdown item'})
-  %>
+      <%= form.select(:english_as_language, options_for_select([
+        ["Yes", true],
+        ["No", false]]),
+        {prompt: 'English as second language?'},
+        {:class=>'ui simple dropdown item'})%>
+#Gender Dropdown
     <h3 class="ui header">Gender </h3>
-  <%= form.select(:gender, options_for_select([
-    ["Male", true],
-    ["Female", false]]),
-    {prompt: 'Select Gender'},
-    {:class=>'ui simple dropdown item'})
-  %>
+      <%= form.select(:gender, options_for_select([
+        ["Male", true],
+        ["Female", false]]),
+        {prompt: 'Select Gender'},
+        {:class=>'ui simple dropdown item'})%>
+#Class Dropdown
     <h3 class="ui header">Class </h3>
-  <%= form.select(:classroom_id,
-      options_for_select(Classroom.all.pluck(:name, :id)),
-      :class => 'ui simple dropdown item' )
-  %>
-
-
-
-    <div class="ui divider"></div>
-
-<% @skill.each do |skill| %>
-<div class="ui segment">
-  <%= skill.name %>
-      <%= form.fields_for :skill_levels do |builder| %>
-        <%= builder.select(:proficiency_level_id,
-            options_for_select(@skill_level_select),
-            :class => 'ui simple dropdown item' )
-        %>
+      <%= form.select(:classroom_id,
+          options_for_select(Classroom.all.pluck(:name, :id)),
+          :class => 'ui simple dropdown item' )%>
+#Proficiency Level Select
+  <div class="ui divider"></div>
+    <div class="ui grid">
+      <div class="ui grid">
+        <% @skill.each do |skill| %>
+        <div class="four wide column">
+          <div class="ui segment">
+            <%= skill.name.capitalize %>
+                <%= form.fields_for :skill_levels do |builder| %>
+                  <%= builder.select(:proficiency_level_id,
+                      options_for_select(@skill_level_select),
+                      :class => 'ui simple dropdown item' )
+                  %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
     </div>
-<% end %>
-
-  <%= form.submit 'Create Student', :class => 'ui green button' %>
+  <div class="ui divider"></div>
+  <%= form.submit 'Create Student', :class => 'ui green button center aligned' %>
 <% end %>

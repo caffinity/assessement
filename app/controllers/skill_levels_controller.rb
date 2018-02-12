@@ -1,16 +1,20 @@
 class SkillLevelsController < ApplicationController
 
   def show
-    @skill_level = SkillLevel.find(params[:id])
-    @listening = SkillLevel.where(student_id: :id)
-    @achievements = @skill_level.proficiency_level.achievement.where(proficiency_level_id: @skill_level.proficiency_level_id)
-    @name = @skill_level.proficiency_level.skill.name
-    @level = @skill_level.proficiency_level.level
+    @skill_level   = SkillLevel.find(params[:id])
+    @listening     = SkillLevel.where(student_id: :id)
+    @achievements  = @skill_level.proficiency_level.achievement.where(
+                      proficiency_level_id: @skill_level.proficiency_level_id
+                      )
+    @name          = @skill_level.proficiency_level.skill.name
+    @level         = @skill_level.proficiency_level.level
+    @student_achievements = StudentAchievement.all
   end
 
   def new
     @skill_level   = SkillLevel.new()
     @student       = Student.find(params[:student_id])
+    @student_achievements = StudentAchievement.new
   end
 
   def create
@@ -24,9 +28,26 @@ class SkillLevelsController < ApplicationController
     end
   end
 
-  def update_proficiency
-    skill_level.level_up_proficiency! # Controller lets model do all of the hard work
+  def create_student_achievement
+    @skill_level   = SkillLevel.find(params[:id])
+    achievement    = params[:achievement]
+    @new_student_achievement = StudentAchievement.create(student_id: @skill_level.student.id, achievement_id: achievement)
     redirect_to request.referrer
+  end
+
+  def destroy_student_achievement
+    achievement    = params[:student_achievement]
+    StudentAchievement.find(achievement).destroy
+    redirect_to request.referrer
+  end
+
+  def student_progress
+    @count = @skill_level.proficiency_level.achievement.count
+    @arrry = @skill_level.proficiency_level.achievement.each_with_object([]) do |arr, achievement |
+      arr << achievement.id
+    end
+    # @completed = StudentAchievement.find_by(student_id: @skill_level.student.id, achievement_id: achievement_id).count
+
   end
 
   private

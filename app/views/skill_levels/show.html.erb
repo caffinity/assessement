@@ -1,51 +1,45 @@
 <%= link_to 'Back', student_path(@skill_level.student_id), :class => 'ui inverted green button' %>
-<%= link_to '-- Refresh Page if complete doesnt submit --', skill_level_path(@skill_level.id), :class => 'ui red button right floated ' %>
   <h1 class="ui header center aligned"> P<%= @level %> <%= @name.capitalize %> Proficiency
   <div class="sub header">the <%= @name.capitalize %> Proficiency for <%= @skill_level.student.first_name %></div></h1>
   <div class="ui grid middle left aligned">
     <div class="four wide column"></div>
       <div class="eight wide column">
         <div class="ui raised segment">
-          <% @achievements.where(:achieved => false).shuffle.each do |achievement| %>
-            <div class="ui clearing segment">
-              <div class="ui right floated middle aligned segment">
-                <div class="ui toggle fitted checkbox" data-no-turbolink="true">
-                  <%= form_for achievement, remote: true, url: student_achievement_achievement_path(achievement) do |f| %>
-                    <input type="checkbox">
-                      <%= f.check_box :achieved %>
-                        <label></label>
+          <%= @skill_level.proficiency_level.achievement.count %>
+             <%= @skill_level.student.student_progress(@skill_level) %>
+
+
+              <% @skill_level.proficiency_level.achievement.shuffle.each do |achievement| %>
+                <% student_achievement = @skill_level.student.has_achievement?(achievement) %>
+                  <% if student_achievement.present? %>
+                  <% else %>
+                    <div class="ui clearing segment">
+
+                      <i class="huge edit icon"></i>
+                      <%= achievement.name %>
+                      <%= link_to "Achieved", create_student_achievement_skill_level_path(:achievement => achievement.id), :class => 'ui green button right floated' %>
+
                     </div>
-                  <%= f.submit 'Done', :class => 'ui small green button'%>
-                <% end %>
-              </div>
-                <p class="ui middle aligned right floated">
-                  <i class="huge edit icon"></i>
+                  <% end %>
+              <% end %>
+          </div>
+        <div class="ui divider"></div>
+        <div class="ui clearing segment">
+          <div class="ui raised segmenet">
+            <% @skill_level.proficiency_level.achievement.shuffle.each do |achievement| %>
+              <% student_achievement = @skill_level.student.has_achievement?(achievement) %>
+              <% if student_achievement %>
+              <div class="ui clearing segment">
+                <i class="huge checkmark box icon"></i>
                   <%= achievement.name %>
-                  <%= achievement.achievement %>
-                </p>
-            </div>
-          <% end %>
-        </div>
-  <div class="ui divider"></div>
-    <% @achievements.where(:achieved => true).shuffle.each do |achievement| %>
-      <div class="ui clearing segment">
-        <div class="ui right floated middle aligned segment">
-          <div class="ui toggle fitted checkbox">
-            <%= form_for achievement, remote: true, url: student_achievement_achievement_path(achievement) do |f| %>
-              <input type="checkbox">
-              <%= f.check_box :achieved %>
-              <label></label>
+                  <%= link_to "Delete", destroy_student_achievement_skill_level_path(:student_achievement => student_achievement.id), :class => 'ui red button right floated' %>
               </div>
-            <%= f.submit "uncomplete", :class => 'ui gray mini button' %>
+              <% else %>
+
+              <% end %>
             <% end %>
+          </div>
         </div>
-        <p class="ui middle aligned right floated">
-          <i class="huge checkmark box icon"></i>
-            <%= achievement.name %>
-            <%= achievement.achievement %>
-        </p>
-      </div>
-    <% end %>
-      </div>
-      <div class="two wide column">  <p> **Slight bug present with the complete button. If the page doesnt respond when you click it, Try refreshing the page.</p></div>
+
+
   </div>
