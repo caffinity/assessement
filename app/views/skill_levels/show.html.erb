@@ -1,9 +1,34 @@
 <%= link_to 'Back', student_path(@skill_level.student_id), :class => 'ui inverted green button' %>
   <h1 class="ui header center aligned"> P<%= @level %> <%= @name.capitalize %> Proficiency
-  <div class="sub header">the <%= @name.capitalize %> Proficiency for <%= @skill_level.student.first_name %></div></h1>
+  <div class="sub header"><%= @skill_level.student.first_name %> has achieved </div></h1>
   <div class="ui grid middle left aligned">
     <div class="four wide column"></div>
       <div class="eight wide column">
+        <% @count = @skill_level.proficiency_level.achievement.count %>
+        <% @progress = @skill_level.student.student_progress(@skill_level) %>
+        <% @percent_achieved = @progress/@count.to_f %>
+
+        <%= content_tag :div, :class => 'ui big indicating progress', id: "progress",
+        data: {value: @progress,
+               total: @count } do
+        %>
+          <div class="bar">
+            <div class="progress"></div>
+          </div>
+            <div class="label"> <%= @percent_achieved >= '.75'.to_f ? 'Mastered' : (@percent_achieved >= '.41'.to_f ? 'Developing' : 'Emerging') %></div>
+              <script charset="utf-8">
+                $('#progress').progress({
+                                          label: 'ratio',
+                                          text: {
+                                          ratio: '{value} of {total} '
+                                          }
+                                        });
+              </script>
+        <% end %>
+
+
+
+
         <div class="ui raised segment">
               <% @skill_level.proficiency_level.achievement.shuffle.each do |achievement| %>
                 <% student_achievement = @skill_level.student.has_achievement?(achievement) %>
@@ -18,23 +43,7 @@
               <% end %>
           </div>
         <div class="ui divider"></div>
-        <%= content_tag :div, :class => 'ui big indicating progress', id: "progress",
-        data: {value: @skill_level.student.student_progress(@skill_level),
-               total: @skill_level.proficiency_level.achievement.count} do
-        %>
-          <div class="bar">
-            <div class="progress"></div>
-          </div>
-            <div class="label">Student Achievement for this Proficiency level</div>
-              <script charset="utf-8">
-                $('#progress').progress({
-                                          label: 'ratio',
-                                          text: {
-                                          ratio: 'Achieved {value} of {total} '
-                                          }
-                                        });
-              </script>
-        <% end %>
+
         <div class="ui clearing segment">
           <div class="ui raised segmenet">
             <% @skill_level.proficiency_level.achievement.shuffle.each do |achievement| %>
