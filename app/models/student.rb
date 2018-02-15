@@ -1,5 +1,4 @@
 class Student < ApplicationRecord
-  require 'csv'
   has_many :skill_levels, dependent: :destroy
   belongs_to :classroom
   accepts_nested_attributes_for :skill_levels #proficiency_level_id & #student_id Statement optional
@@ -18,17 +17,16 @@ class Student < ApplicationRecord
   # end
 
   def student_progress(skill_level)
-    @count = skill_level.proficiency_level.achievement.each_with_object([]) do | achievement, arr |
-      if StudentAchievement.where(student_id: skill_level.student.id, achievement_id: achievement.id).present?
-        arr << StudentAchievement.where(student_id: skill_level.student.id, achievement_id: achievement.id)
-      else
-      end  
-    end
-    @count.count
+    skill_level.proficiency_level.achievement.each_with_object([]) do | achievement, arr |
+      if StudentAchievement.where(student: skill_level.student, achievement: achievement).present?
+        arr << StudentAchievement.where(student: skill_level.student, achievement: achievement)
+      end
+    end.count
   end
 
 
   def self.to_csv(options = {})
+    require 'csv'
     CSV.generate(options) do |csv|
       csv << column_names
       all.each do |students|
