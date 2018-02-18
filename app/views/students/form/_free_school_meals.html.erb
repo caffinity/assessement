@@ -1,0 +1,6 @@
+<%= form.select(:free_school_meals, options_for_select([
+  ["Yes", true],
+  ["No", false]], @student.free_school_meals),
+  {prompt: ''},
+  {:class=>'ui simple dropdown item'})
+%>

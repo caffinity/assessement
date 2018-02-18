@@ -18,11 +18,15 @@
           </div>
         </div>
         <div class="eight wide column">
+          <div class="ui divider"></div>
+            <%= form.label :avatar %>
+            <%= form.file_field :avatar %>
+          <div class="ui divider"></div>
           <h3 class="ui header">First name <%= form.text_field :first_name %>
           <h3 class="ui header">Last name <%= form.text_field :last_name %>
           <h3 class="ui header">Class </h3>
             <%= form.select(:classroom_id,
-            options_for_select(Classroom.all.pluck(:name, :id),@student.classroom_id),
+            options_for_select(Classroom.all.pluck(:name, :id), @student.classroom_id),
             :class => 'ui simple dropdown item' )
             %>
         </div>
@@ -37,8 +41,7 @@
             {:class=>'ui simple dropdown item'})
           %>
         </div>
-
-      </div>
+        </div>
       <div class="row">
         <div class="four wide column">
           <div class="ui raised segment">
@@ -53,7 +56,6 @@
           </div>
         </div>
         <div class="eight wide column">
-
           <h3 class="ui header">Gender </h3>
           <%= form.select(:gender, options_for_select([
             ["Male", true],
@@ -62,13 +64,25 @@
             {:class=>'ui simple dropdown item'})
           %>
             <div class="ui divider"></div>
+            <div class="ui grid">
+                <% @student.skill_levels.each do |skill_level| %>
+                <%= form.fields_for skill_level do |builder| %>
+                <div class="four wide column">
+                  <div class="ui segment">
+                      <%= skill_level.proficiency_level.skill.name %>
+                        <%= builder.select(:proficiency_level_id,
+                            options_for_select(@skill_level_select),
+                            :class => 'ui simple dropdown item' )
+                        %>
+                  </div>
+                </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
 
-          <%= @student.skill_levels.first %>
-
-
-        </div>
         <div class="four wide column">
-          <h3 class="ui header">Year Group
+          <h3 class="ui header">Year Group</h3>
             <%= form.select(:year, options_for_select([
               ["Year Group 1", 1],
               ["Year Group 2", 2],
@@ -82,11 +96,10 @@
               {prompt: 'Student Year Group?'},
               {:class=>'ui simple dropdown item'})
             %>
+            <div class="ui divider"></div>
       </div>
-      <%= form.label :avatar %>
-      <%= form.file_field :avatar %>
-
-
+      </div>
+  </div>
 <%= form.submit 'Update Student', :class => 'ui green button' %>
         <% end %>
       </div>
