@@ -26,7 +26,7 @@ class SkillsController < ApplicationController
     if @skill.update(skills_params)
       redirect_to skill_path(@skill)
     else
-      
+
     end
   end
 
@@ -50,6 +50,10 @@ class SkillsController < ApplicationController
       end
     else
     end
+  end
+
+  def level_up_proficiency
+    level_up_proficiency!
   end
 
   private

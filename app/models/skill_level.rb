@@ -4,13 +4,12 @@ class SkillLevel < ApplicationRecord
   has_many   :skill_level_achievements, -> { where(skill_level: self) }, # Default scope on relationship
              through: :proficiency_level
 
-  def level_up_proficiency!
+  def self.level_up_proficiency!
       ActiveRecord::Base.transaction do # Starts a transaction, will rollback all changes if any part fails
         self.proficiency_level = ProficiencyLevel.find_by( # Assign new prof_level
           level: proficiency_level.level + 1,  # Find correct one
           skill: proficiency_level.skill       # Find correct one
         )
-        create_skill_level_achievements!       # Create new achievements, still inside transaction
         save!
       end
   end

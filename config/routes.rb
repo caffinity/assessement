@@ -22,6 +22,7 @@ end
         get 'create_student_achievement'
         get 'destroy_student_achievement'
         get 'student_progress'
+        get 'level_up_proficiency'
       end
     end
 
