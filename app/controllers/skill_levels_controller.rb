@@ -9,6 +9,7 @@ class SkillLevelsController < ApplicationController
     @name          = @skill_level.proficiency_level.skill.name
     @level         = @skill_level.proficiency_level.level
     @student_achievements = StudentAchievement.all
+    @student_record = StudentRecord.all
   end
 
   def new
@@ -51,17 +52,22 @@ class SkillLevelsController < ApplicationController
 
   end
   def level_up_proficiency
+    @date = Date.new
     @skill_level   = SkillLevel.find(params[:id])
+    @student_record = StudentRecord.create(student_id: @skill_level.student_id, proficiency_level_id: @skill_level.proficiency_level_id)
+
       @new = ProficiencyLevel.find_by( # Assign new prof_level
       level: @skill_level.proficiency_level.level + 1,  # Find correct one
       skill: @skill_level.proficiency_level.skill       # Find correct one
-    )
+      )
       if @new.nil?
-      redirect_to request.referrer, alert: 'The Student has achieved the highest proficiency'
-    else
-      @skill_level.update(proficiency_level_id: @new.id).valid?
-      redirect_to request.referrer
-    end
+        redirect_to request.referrer,
+        alert: 'The Student has achieved the highest proficiency'
+      else
+        @skill_level.update(proficiency_level_id: @new.id)
+        @student_record.save
+        redirect_to request.referrer
+      end
 
   end
   private

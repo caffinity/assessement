@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207185355) do
+ActiveRecord::Schema.define(version: 20180218211057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,14 @@ ActiveRecord::Schema.define(version: 20180207185355) do
     t.index ["student_id"], name: "index_student_achievements_on_student_id"
   end
 
+  create_table "student_records", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "proficiency_level_id"
+    t.datetime "created_at"
+    t.index ["proficiency_level_id"], name: "index_student_records_on_proficiency_level_id"
+    t.index ["student_id"], name: "index_student_records_on_student_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -115,4 +123,6 @@ ActiveRecord::Schema.define(version: 20180207185355) do
   add_foreign_key "skill_level_achievements", "students"
   add_foreign_key "student_achievements", "achievements"
   add_foreign_key "student_achievements", "students"
+  add_foreign_key "student_records", "proficiency_levels"
+  add_foreign_key "student_records", "students"
 end

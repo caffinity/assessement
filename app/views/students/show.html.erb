@@ -72,7 +72,29 @@
   <div class="ui raised segment">
     <h4 class="ui header center aligned">Student Notes</h4>
       <p class="ui center aligned">
-        Student notes go here.
+
+  <div class="ui small feed">
+    <h4 class="ui header">Student Progress</h4>
+        <% @student_record.reverse_each.each do |record| %>
+
+
+          <div class="event">
+            <div class="content">
+              <div class="summary">
+                <%= "P#{record.proficiency_level.level} #{record.proficiency_level.skill.name.capitalize} was achieved at #{record.created_at.strftime('%v')}"
+               %>
+
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+              </div>
+            </div>
+
+
+
+</div>
       </p>
     <h5 class="ui header center aligned">Add new Student Note</h5>
   </div>

@@ -35,6 +35,7 @@ class StudentsController < ApplicationController
 		@student = Student.find(params[:id])
     @student.skill_levels.each do |skill_level|
     @student_achievements = [] << @student.skill_levels.first.proficiency_level.achievement
+    @student_record = StudentRecord.where(student_id: @student.id)
     end
   end
 
