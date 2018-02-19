@@ -15,7 +15,10 @@
     <div class="ui inverted secondary pointing menu">
       <%= link_to 'Home', pages_path, :class => 'ui large inverted white button' %>
       <%= link_to 'Classroom', classrooms_path, :class => 'ui large inverted white button' %>
+      <% if Classroom.find_by(teacher_id: current_teacher.id).nil?  %>
+      <% else %>
       <%= link_to 'Student', students_path, :class => 'ui large inverted white button' %>
+      <% end %>
       <%= link_to 'Subjects & Levels', subjects_path, :class => 'ui large inverted white button' %>
 
 
