@@ -35,7 +35,7 @@
   <% end %>
 
   <div class="ui raised segment">
-    <% if @percent_achieved > @seventy_five %>
+    <% if @percent_achieved >= @seventy_five %>
       <%= link_to "Progress to Next Level!",
       level_up_proficiency_skill_level_path,
       :class => 'ui inverted fluid center aligned blue button'
