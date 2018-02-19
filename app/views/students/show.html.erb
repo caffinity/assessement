@@ -71,31 +71,48 @@
 
   <div class="ui raised segment">
     <h4 class="ui header center aligned">Student Notes</h4>
-      <p class="ui center aligned">
-
-  <div class="ui small feed">
-    <h4 class="ui header">Student Progress</h4>
-        <% @student_record.reverse_each.each do |record| %>
-
-
-          <div class="event">
-            <div class="content">
-              <div class="summary">
-                <%= "P#{record.proficiency_level.level} #{record.proficiency_level.skill.name.capitalize} was achieved at #{record.created_at.strftime('%v')}"
-               %>
-
-              </div>
+      <%= link_to "Add Note", new_student_student_note_path(@student), :class => 'ui button' %>
+    <% @student_note.reverse.each do |note| %>
+    <div class="ui green segment">
+      <div class="ui comments">
+        <div class="comment">
+          <div class="content">
+            <a class="author"><%= note.created_by %></a>
+            <div class="metadata">
+              <div class="date">    <%= note.created_at.strftime('%v') %></div>
+            </div>
+            <div class="text">
+              <p><%= note.note.html_safe %></p>
+            </div>
+            <div class="actions">
+              <a class="reply"><%= link_to "Edit", edit_student_note_path(note.id) %></a>
+              <% if current_teacher.admin? %>
+                <a class="reply"><%= link_to 'delete', student_note_path(note), :method => :delete, data: {:confirm => "You sure?" } ,
+                            :title => "Delete this note?" %></a>
+              <% end %>
             </div>
           </div>
-          <% end %>
         </div>
-              </div>
-            </div>
-
-
-
-</div>
-      </p>
-    <h5 class="ui header center aligned">Add new Student Note</h5>
+      </div>
+    </div>
+    <% end %>
+<p class="ui center aligned">
+  <div class="ui small feed">
+    <h4 class="ui header">Student Progress Record</h4>
+    <% @student_record.reverse_each.each do |record| %>
+      <div class="event">
+        <div class="content">
+          <div class="summary">
+            <%= "P#{record.proficiency_level.level} #{record.proficiency_level.skill.name.capitalize} was achieved at #{record.created_at.strftime('%v')}"
+            %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
+  </p>
+</div>
+</div>
+</div>
+</div>
 </div>

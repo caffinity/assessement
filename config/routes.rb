@@ -25,6 +25,7 @@ end
         get 'level_up_proficiency'
       end
     end
+    resources :student_notes
 
   end
   resources :subjects, :skills

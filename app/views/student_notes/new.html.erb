@@ -1,0 +1,9 @@
+Add Note
+<div class="ui form">
+<%= form_for(@student_note, url: student_student_notes_path)  do |f| %>
+  <%= f.trix_editor :note %>
+  <%= f.hidden_field(:student_id, :value => @student.id) %>
+  <%= f.hidden_field(:created_by, :value => current_teacher.first_name + " " + current_teacher.last_name) %>
+  <%= f.submit %>
+</div>
+<% end %>

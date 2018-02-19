@@ -37,6 +37,7 @@ class StudentsController < ApplicationController
     @student_achievements = [] << @student.skill_levels.first.proficiency_level.achievement
     @student_record = StudentRecord.where(student_id: @student.id)
     end
+    @student_note = StudentNote.where(student_id: @student.id)
   end
 
 

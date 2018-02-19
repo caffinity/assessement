@@ -1,0 +1,8 @@
+<div class="ui container">
+  <h1>Edit Note</h1>
+  <%= form_for(@student_note)  do |f| %>
+    <%= f.trix_editor :note %>
+    <div class="ui divider"></div>
+    <%= f.submit %>
+  <% end %>
+</div>
