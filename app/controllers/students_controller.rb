@@ -67,9 +67,6 @@ class StudentsController < ApplicationController
 		@student = Student.new(student_params)
 		if @student.save
 			redirect_to student_path(@student)
-      binding.pry
-
-
 		else
       render 'show'
 		end

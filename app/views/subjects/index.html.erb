@@ -1,63 +1,62 @@
 <div class="ui clearing container">
-  <h2 class="ui header center aligned">Current Subjects</h2><% if current_teacher.admin? %>
-    <%= link_to 'Create Subject',
-    new_subject_path,
-    :class => 'ui mini inverted green button' %>
-  <% end %>
-    </div>
+  <h2 class="ui header center aligned">Current Subjects</h2>
+    <% if current_teacher.admin? %>
+      <%= link_to 'Create Subject',
+      new_subject_path,
+      :class => 'ui mini inverted green button' %>
+    <% end %>
+</div>
   <div class="ui divider"> </div>
-
-
-  <div class="ui center aligned segment">
-    <div class="ui three column grid">
-      <div class="column"> <h1>Subjects</h1> </div>
-      <div class="column"> <h1>Skills</h1> </div>
-      <div class="column"> <h1>Proficiency levels</h1> </div>
-      <div class="column">
-        <div class="ui two column grid">
-          <% @subjects.each do |subject| %>
-          <div class="column">
-              <%= link_to subject.name.capitalize ,
-              subject_path(subject),
-              :class => 'ui large inverted blue button' %>
-          </div>
-          <% end %>
+<div class="ui center aligned segment">
+  <div class="ui three column grid">
+    <div class="column"> <h1>Subjects</h1> </div>
+    <div class="column"> <h1>Skills</h1> </div>
+    <div class="column"> <h1>Proficiency levels</h1> </div>
+    <div class="column">
+      <div class="ui two column grid">
+        <% @subjects.each do |subject| %>
+        <div class="column">
+            <%= link_to subject.name.capitalize ,
+            subject_path(subject),
+            :class => 'ui large inverted blue button' %>
         </div>
+        <% end %>
       </div>
-      <div class="column">
-        <%= link_to 'View All Skill',
-        skills_path,
-        :class => 'ui large inverted yellow button'  %>
-      </div>
-      <div class="column">
-        <%= link_to 'View All Proficiency Levels',
-        proficiency_levels_path,
-        :class => 'ui large inverted violet button'  %>
-      </div>
+    </div>
+    <div class="column">
+      <%= link_to 'View All Skill',
+      skills_path,
+      :class => 'ui large inverted yellow button'  %>
+    </div>
+    <div class="column">
+      <%= link_to 'View All Proficiency Levels',
+      proficiency_levels_path,
+      :class => 'ui large inverted violet button'  %>
     </div>
   </div>
-    <h3 class="ui header center aligned"> Subject - Skill - Proficiency Level Overview </h3>
-    <div class="ui container center aligned">
-      <table class="ui very compact table">
-        <thead>
-          <tr>
-            <th>Subject	        	    </th>
-            <th>Skill        	        </th>
-            <th>P level               </th>
-            <th>Achievement Title     </th>
-            <th>Achievement           </th>
-          </tr>
-        </thead>
-        <% @achievement.each do |achievement| %>
-          <tr>
-            <td><%= achievement.proficiency_level.skill.subject.name %> </td>
-            <td><%= achievement.proficiency_level.skill.name %>         </td>
-            <td><%= achievement.proficiency_level.level %>              </td>
-            <td><%= achievement.proficiency_level.level %>              </td>
-            <td><%= achievement.name %>                                 </td>
-            <td><%= achievement.achievement %>                          </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-<div class="ui divider"> </div>
+</div>
+  <h3 class="ui header center aligned"> Subject - Skill - Proficiency Level Overview </h3>
+<div class="ui container center aligned">
+  <table class="ui very compact table">
+    <thead>
+      <tr>
+        <th>Subject	        	    </th>
+        <th>Skill        	        </th>
+        <th>P level               </th>
+        <th>Achievement Title     </th>
+        <th>Achievement           </th>
+      </tr>
+    </thead>
+    <% @achievement.each do |achievement| %>
+      <tr>
+        <td><%= achievement.proficiency_level.skill.subject.name.capitalize %> </td>
+        <td><%= achievement.proficiency_level.skill.name.capitalize %>         </td>
+        <td><%= achievement.proficiency_level.level %>                         </td>
+        <td><%= achievement.proficiency_level.level %>                         </td>
+        <td><%= achievement.name %>                                            </td>
+        <td><%= achievement.achievement %>                                      </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class="ui divider"></div>

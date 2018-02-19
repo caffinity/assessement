@@ -1,6 +1,11 @@
 <h1>Showing <%= @skill.name %></h1>
   <%= link_to 'Return to Subjects', subjects_path, :class => 'ui green inverted button' %>
   <%= link_to 'back', :back, :class => 'ui green inverted button' %>
+  <% if current_teacher.admin? %>
+    <%= link_to 'Edit Skill Name',
+    edit_skill_path(@skill),
+    :class => 'ui blue right floated button' %>
+  <% end %>
   <table class="ui very compact table">
     <thead>
       <tr>
