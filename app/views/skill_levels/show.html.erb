@@ -48,7 +48,7 @@
             <div class="ui clearing segment">
               <i class="huge edit icon"></i>
               <%= achievement.name %>
-              <%= link_to "Achieved", create_student_achievement_skill_level_path(:achievement => achievement.id), :class => 'ui green button right floated' %>
+              <%= link_to "[   •   ]", create_student_achievement_skill_level_path(:achievement => achievement.id), :class => 'ui button right floated' %>
             </div>
           <% end %>
       <% end %>
@@ -62,11 +62,12 @@
         <div class="ui clearing segment">
           <i class="huge checkmark box icon"></i>
             <%= achievement.name %>
-            <%= link_to "Delete",
+            <%= link_to "Achieved",
             destroy_student_achievement_skill_level_path(
             :student_achievement => student_achievement.id),
-            :class => 'ui red button right floated'
+            :class => 'ui green button right floated pause circle outline icon'
             %>
+            
         </div>
         <% else %>
         <% end %>
