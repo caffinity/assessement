@@ -49,7 +49,7 @@ class ProficiencyLevelsController < ApplicationController
   private
 
   def proficiency_level_params
-    params.require(:proficiency_level).permit(:id, :level, :statement, :skill_id)
+    params.require(:proficiency_level).permit(:id, :level, :statement, :skill_id, :prefix)
   end
 
 end

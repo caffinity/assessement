@@ -7,7 +7,7 @@
 	      						:class => 'ui massive inverted green button center aligned' %>
 	    </div>
 	    <div class="ui segment">
-	    	<h1 class="ui header center aligned"> Grade <%= @student.year %></h1>
+	    	<h1 class="ui header center aligned"> Year Group <%= @student.year %></h1>
 	    </div>
       <%= render 'pupil_premium' %>
 	  </div>
@@ -48,7 +48,7 @@
             <% @student.skill_levels.each do |student| %>
               <div class="five wide column center aligned">
 
-                  <%= link_to "P#{student.proficiency_level.level}",
+                  <%= link_to "#{student.proficiency_level.prefix}#{number_with_precision(student.proficiency_level.level, strip_insignificant_zeros: true)}",
                   skill_level_path(student),
                   :class => 'ui massive standard button center aligned' %>
                   <h4>
@@ -103,7 +103,8 @@
       <div class="event">
         <div class="content">
           <div class="summary">
-            <%= "P#{record.proficiency_level.level} #{record.proficiency_level.skill.name.capitalize} was achieved at #{record.created_at.strftime('%v')}"
+            <%= "#{record.proficiency_level.prefix}#{number_with_precision(record.proficiency_level.level, strip_insignificant_zeros: true)}
+             #{record.proficiency_level.skill.name.capitalize} was achieved at #{record.created_at.strftime('%v')}"
             %>
           </div>
         </div>

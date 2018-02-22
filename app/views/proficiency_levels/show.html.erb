@@ -1,7 +1,7 @@
 <div class="ui container center aligned">
   <h1 class="ui header center aligned">
     <%= @proficiency_level.skill.name.capitalize %>
-    P<%= @proficiency_level.level %>
+    <%= @proficiency_level.prefix %><%= number_with_precision(@proficiency_level.level, strip_insignificant_zeros: true) %>
   </h1>
   <div class="ui divider"></div>
   <%= link_to 'Return to Skill Level', skill_path(@proficiency_level.skill_id), :class => 'ui inverted green button' %>

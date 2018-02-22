@@ -1,11 +1,21 @@
-<h1>Showing Proficiency Level / New page from the #Proficiency Controller</h1>
 
 
+<%= link_to "Return to Skill", skill_path(@skill), :class => "ui blue button" %>
 
-  <%= form_for(@proficiency_level) do |f| %>
-    <%= f.text_field :level %>
-    <%= f.text_area :statement %>
-    <%= f.hidden_field(:skill_id, :value => @skill.id ) %>
+<div class="ui raised center aligned segment">
+  <div class="ui massive form center aligned">
+    <%= form_for(@proficiency_level) do |f| %>
+      <h1 style="padding-bottom: 5%"> Create a New Proficiency Level</h1>
+      <label style="padding-bottom: 2.5%"> Proficiency Prefix (N or P)</label>
+      <%= f.select :prefix, ['P', 'N'], :class => "ui search dropdown"%>
+      <label style="padding-top: 2.5%; padding-bottom:1.5%">Proficiency Level (number only) </label>
+      <%= f.text_field :level %>
+      <label style="padding-top: 2.5%; padding-bottom:1.5%">Proficiency Level Statement </label>
+      <%= f.trix_editor :statement, :class => 'ui field' %>
+      <%= f.hidden_field(:skill_id, :value => @skill.id ) %>
 
-    <%= f.submit %>
-  <% end %>
+      <div class="ui divider"></div>
+      <%= f.submit(:class => 'ui green massive button') %>
+    <% end %>
+  </div>
+</div>
