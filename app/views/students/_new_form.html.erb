@@ -1,0 +1,127 @@
+<div class="ui grid">
+  <div class="five wide column">
+  </div>
+  <div class="six wide column">
+    <%= form_for(@student) do |form| %>
+    <div class="ui segment">
+      <div class="ui big form">
+      <% if @student.avatar? %>
+        <%= image_tag(@student.avatar.url, :class => "ui medium centered circular image", :style => 'height: 14rem; width: 14rem;') %>
+
+      <% end %>
+      <div class="field">
+        <label> Update Student Avatar </label>
+        <%= form.file_field :avatar %>
+    </div>
+      <h3 class="ui header">Update Name                 </h3>
+        <div class="two fields">
+          <%= form.text_field :first_name %><%= form.text_field :last_name %>
+        </div>
+      </div>
+  <!-- Admin only -->
+    <!-- Classroom -->
+      <div class="field">
+        <label>Classroom</label>
+        <%= form.select(:classroom_id, options_for_select(
+          Classroom.all.pluck(:name, :id),
+          @student.classroom_id),
+          {prompt: 'Update Classroom'},
+          :class => 'ui fluid selection dropdown' )
+          %>
+        </div>
+    <!-- Gender -->
+      <div class="field">
+          <label>Gender</label>
+          <%= form.select(:gender, options_for_select([
+            ["Male", true],
+            ["Female", false]], @student.gender),
+            {prompt: 'Update Student Gender'},
+            {:class=>'ui fluid selection dropdown'})
+            %>
+          </div>
+    <!-- Year Group -->
+      <div class="field">
+        <label>Year Group</label>
+        <%= form.select(:year, options_for_select([
+                               ["Year Group 1", 1],
+                               ["Year Group 2", 2],
+                               ["Year Group 3", 3],
+                               ["Year Group 4", 4],
+                               ["Year Group 5", 5],
+                               ["Year Group 6", 6],
+                               ["Year Group 7", 7],
+                               ["Year Group 8", 8],
+                               ["Year Group 9", 9],
+                               ["Year Group 10", 10],
+                               ["Year Group 11", 11],
+                               ["Year Group 12", 12],
+                               ["Year Group 13", 13],
+                               ], @student.year ),
+                              {prompt: 'Student Year Group?'},
+                              {:class=>'ui fluid selection dropdown'})
+        %>
+      </div>
+
+
+      <% if current_teacher.admin? %>
+        <!-- English as Second Lanugage -->
+          <div class="field">
+            <label>English as Second Lanugage</label>
+            <%= form.select(:english_as_language, options_for_select([
+                            ["Yes", true],
+                            ["No", false]], @student.english_as_language),
+                            {prompt: 'English as second language?'},
+                            {:class=>'ui fluid selection dropdown'})
+            %>
+          </div>
+        <!-- Free School Meals -->
+          <div class="field">
+            <label>Free School Meals</label>
+            <%= form.select(:free_school_meals, options_for_select(
+                           [["Yes", true],
+                            ["No", false]],
+                            @student.free_school_meals),
+                            {prompt: 'Student Recieve FSM?'},
+                            {:class=>'ui fluid selection dropdown'})
+            %>
+          </div>
+        <!-- Pupil Premium -->
+          <div class="field">
+            <label>Pupil Premium</label>
+            <%= form.select(:pupil_premium, options_for_select([
+                            ["Yes", true],
+                            ["No", false]], @student.pupil_premium),
+                            {prompt: 'Qualify for pupil premium?'},
+                            {:class=>'ui fluid selection dropdown'})
+            %>
+          </div>
+      <% end %>
+
+
+
+        <% @skill.each do |skill| %>
+          <div class="field">
+            <label><%= skill.name.capitalize %></label>
+              <%= form.fields_for :skill_levels do |builder| %>
+                <%= builder.select(:proficiency_level_id,
+                                    options_for_select(@skill_level_select),
+                                   {:class => 'ui fluid selection dropdown'},
+                                   {:prompt => "#{skill.name.capitalize} level"}  )
+                 %>
+              <% end %>
+            </div>
+          <% end %>
+
+
+
+
+          </div>
+      </div>
+
+        <%= form.submit 'Update Student', :class => 'ui fluid green button' %>
+      <% end %>
+    </div>
+
+    </div>
+  <div class="five wide column"></div>
+</div>
