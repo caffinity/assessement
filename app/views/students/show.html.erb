@@ -48,7 +48,7 @@
             <% @student.skill_levels.each do |student| %>
               <div class="five wide column center aligned">
 
-                  <%= link_to "#{student.proficiency_level.prefix}#{number_with_precision(student.proficiency_level.level, strip_insignificant_zeros: true)}",
+                  <%= link_to "#{number_with_precision(student.proficiency_level.level, strip_insignificant_zeros: true)}",
                   skill_level_path(student),
                   :class => 'ui massive standard button center aligned' %>
                   <h4>

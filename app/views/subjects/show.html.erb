@@ -19,8 +19,10 @@
     <% @skills.each do |skill| %>
       <tr>
         <td><%= link_to skill.name, skill_url(skill) %> </td>
-        <td><%= skill.name %></td>
-        </tr>
+
+        <td>Level Range
+            <%= number_with_precision(@level_range.min, strip_insignificant_zeros: true) %> -
+            <%= number_with_precision(@level_range.max, strip_insignificant_zeros: true) %>
     <% end %>
   </table>
 

@@ -1,6 +1,6 @@
 <%= link_to 'Back', student_path(@skill_level.student_id), :class => 'ui inverted green button' %>
   <h1 class="ui header center aligned">
-      P<%= @level %>
+      <%= @skill_level.proficiency_level.prefix %><%= number_with_precision(@level, strip_insignificant_zeros: true)%>
       <%= @name.capitalize %>
       Proficiency
     <div class="sub header">
@@ -67,7 +67,7 @@
             :student_achievement => student_achievement.id),
             :class => 'ui green button right floated pause circle outline icon'
             %>
-            
+
         </div>
         <% else %>
         <% end %>

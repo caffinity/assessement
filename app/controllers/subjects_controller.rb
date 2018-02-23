@@ -14,6 +14,10 @@ class SubjectsController < ApplicationController
   def show
     @subject = Subject.find(params[:id])
     @skills = @subject.skills
+    @proficiency_level = ProficiencyLevel.all
+    @level_range = @proficiency_level.each_with_object([]) do |proficiency_level, arr|
+      arr << [proficiency_level.level]
+    end
   end
 
   def create

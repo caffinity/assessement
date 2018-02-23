@@ -16,7 +16,7 @@
     </thead>
     <% @proficiency_level.each do |proficiency_level| %>
       <tr>
-        <td><%= link_to("#{proficiency_level.prefix}#{number_with_precision(proficiency_level.level, strip_insignificant_zeros: true)}", proficiency_level_path(proficiency_level), :class => 'ui inverted green button') %> </td>
+        <td><%= link_to("#{number_with_precision(proficiency_level.level, strip_insignificant_zeros: true)}", proficiency_level_path(proficiency_level), :class => 'ui inverted green button') %> </td>
         <td><%= proficiency_level.statement.html_safe %></td>
         <% if current_teacher.admin? %>
         <td> <%= link_to 'edit', edit_proficiency_level_path(proficiency_level),
