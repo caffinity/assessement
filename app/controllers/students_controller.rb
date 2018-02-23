@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  include ActionView::Helpers::NumberHelper
 	before_action :authenticate_teacher!
 	before_action :set_student, only: [:show, :edit, :destroy]
 
@@ -20,7 +21,8 @@ class StudentsController < ApplicationController
     @student.skill_levels.build
     @skill_level_select = @skill.each_with_object([]) do |other, arr|
         @proficiency_level.where(skill_id: other.id).each do |proficiency_level|
-          @name = "P#{proficiency_level.level}
+          @name = "#{proficiency_level.prefix}#{number_with_precision(proficiency_level.level,
+                 strip_insignificant_zeros: true)}
                     #{proficiency_level.skill.name.capitalize}"
           arr << [@name, proficiency_level.id]
       end
