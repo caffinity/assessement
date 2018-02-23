@@ -12,10 +12,10 @@
     <% @color = "green" %>
   <% end %>
   <div class="column">
-    <%= content_tag :div, :class =>"ui #{@color} inverted segment center aligned" do %>
-      <h4>
+    <%= content_tag :div  do %>
+      <h3 class="ui header center aligned">
         <%= student.proficiency_level.skill.name.capitalize %>
-      </h4>
+      </h3>
       <%= content_tag :div, :class => "ui circular segment", :style => "height: 17rem; width: 17rem;" do  %>
           <%= link_to " #{student.proficiency_level.prefix}#{number_with_precision(student.proficiency_level.level,
               strip_insignificant_zeros: true)}",

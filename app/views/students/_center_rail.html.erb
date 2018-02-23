@@ -1,16 +1,11 @@
 
 <!-- Name & Photo -->
-<h1 class="ui header center aligned"><%= @student.first_name %> <%= @student.last_name %></h1>
-
   <% if @student.avatar? %>
-  <%= image_tag(@student.avatar.url, :class => "ui medium centered circular image") %>
+  <%= image_tag(@student.avatar.url, :class => "ui medium centered circular image", :style => 'height: 14rem; width: 14rem;') %>
   <% end %>
-<div class="ui divider"></div>
+  <h1 class="ui header center aligned"><%= @student.first_name %> <%= @student.last_name %></h1>
+  <div class="ui divider"></div>
 <!-- Skill Levels and Progress -->
-<div class="ui four column centered grid">
-  <%= render 'student_skill_level_status' %>
-<div>
-
-<!-- Student Notes -->
-
-<!-- Skill Records -->
+  <div class="ui four column centered grid">
+    <%= render 'student_skill_level_status' %>
+  <div>
