@@ -10,18 +10,22 @@
   </h1>
 <div class="ui grid middle left aligned">
   <div class="four wide column"></div>
-<div class="eight wide column">
+    <div class="eight wide column">
+
+      <!-- Quick variable saves -->
           <% @count = @skill_level.proficiency_level.achievement.count %>
           <% @progress = @skill_level.student.student_progress(@skill_level) %>
           <% @percent_achieved = @progress/@count.to_f %>
           <% @seventy_five = '.75'.to_f %>
-  <%= content_tag :div, :class => 'ui big indicating progress', id: "progress",
-  data: {value: @progress,
-         total: @count } do
-  %>
-    <div class="bar">
-      <div class="progress"></div>
-    </div>
+
+      <!-- Progress Bar -->
+    <%= content_tag :div, :class => 'ui big indicating progress', id: "progress",
+      data: {value: @progress,
+             total: @count } do
+      %>
+      <div class="bar">
+        <div class="progress"></div>
+      </div>
       <div class="label">
         <%= @percent_achieved >= '.75'.to_f ? 'Mastered' : (@percent_achieved >= '.41'.to_f ? 'Developing' : 'Emerging') %></div>
         <script charset="utf-8">
@@ -32,7 +36,7 @@
                                     }
                                   });
         </script>
-  <% end %>
+    <% end %>
 
   <div class="ui raised segment">
     <% if @percent_achieved >= @seventy_five %>

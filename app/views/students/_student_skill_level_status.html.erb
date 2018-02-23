@@ -1,0 +1,50 @@
+
+<% @student.skill_levels.each do |student| %>
+  <% @count = student.proficiency_level.achievement.count %>
+  <% @progress = student.student.student_progress(student) %>
+  <% @percent_achieved = @progress/@count.to_f %>
+  <% @levels = [".41".to_f,".75".to_f] %>
+  <% if @percent_achieved < @levels[0] %>
+    <% @color = "red" %>
+  <% elsif @percent_achieved > @levels[0] && @percent_achieved < @levels[1] %>
+    <% @color = "yellow" %>
+  <% else %>
+    <% @color = "green" %>
+  <% end %>
+  <div class="column">
+    <%= content_tag :div, :class =>"ui #{@color} inverted segment center aligned" do %>
+      <h4>
+        <%= student.proficiency_level.skill.name.capitalize %>
+      </h4>
+      <%= content_tag :div, :class => "ui circular segment", :style => "height: 17rem; width: 17rem;" do  %>
+          <%= link_to " #{student.proficiency_level.prefix}#{number_with_precision(student.proficiency_level.level,
+              strip_insignificant_zeros: true)}",
+              skill_level_path(student),
+              :class => "ui huge blue inverted button"
+            %>
+          <div class="ui divider">
+          </div>
+            <div class="sub header">
+              <%= content_tag :div, :class => 'ui small indicating progress', id: "progress",
+              data: {value: @progress,
+                     total: @count } do
+              %>
+                <div class="bar">
+                  <div class="progress"></div>
+                </div>
+                  <div class="label">
+                    <%= @percent_achieved >= '.75'.to_f ? 'Mastered' : (@percent_achieved >= '.41'.to_f ? 'Developing' : 'Emerging') %></div>
+                    <script charset="utf-8">
+                      $('#progress').progress({
+                                                label: 'ratio',
+                                                text: {
+                                                ratio: '{value} of {total} '
+                                                }
+                                              });
+                    </script>
+              <% end %>
+            </div>
+        </h2>
+        <% end %>
+  </div><% end %>
+<% end %>

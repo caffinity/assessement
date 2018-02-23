@@ -29,91 +29,48 @@
 	  </div>
 
 <!-- Central RAIL Begins here. -->
+    <%= render "center_rail" %>
 
+  </div>
+</div>
 
-  <h1 class="ui center aligned container ">
+<h3 class="ui header center aligned">Student Notes</h3>
+<%= link_to "Add Note", new_student_student_note_path(@student), :class => 'ui button' %>
+<div class="ui segment">
 
-    <%= @student.first_name %> <%= @student.last_name %>
-  </h1>
-  <% if @student.avatar? %>
-  <%= image_tag(@student.avatar.url, :class => "ui medium centered circular image") %>
+  <% @student_note.reverse.each do |note| %>
+    <a class="author">
+      <%= note.created_by %>
+    </a>
+      <%= note.created_at.strftime('%v') %>
+      <%= note.note.html_safe %>
+    <a class="reply">
+      <%= link_to "Edit", edit_student_note_path(note.id) %>
+    </a>
+  <% if current_teacher.admin? %>
+    <a class="reply">
+      <%= link_to 'Delete', student_note_path(note),
+                            :method => :delete,
+                            data: {:confirm => "You sure?" },
+                            :title => "Delete this note?" %>
+    </a>
   <% end %>
-  <div class="ui divider">
-  </div>
-    <div class="ui grid" >
-      <div class="row">
-        <div class="three wide column"></div>
-        <div class="ten wide column center aligned">
-          <div class="ui grid center aligned">
-            <% @student.skill_levels.each do |student| %>
-              <div class="five wide column center aligned">
-
-                  <%= link_to "#{number_with_precision(student.proficiency_level.level, strip_insignificant_zeros: true)}",
-                  skill_level_path(student),
-                  :class => 'ui massive standard button center aligned' %>
-                  <h4>
-              <%= student.proficiency_level.skill.name.capitalize %>
-                  </h4>
-
-          </div>
-          <% end %>
-
-
-        </div>
-        <div class="three wide column"></div>
-      </div>
-    </div></div>
-
-
-
-
-
-
-  <div class="ui raised segment">
-    <h4 class="ui header center aligned">Student Notes</h4>
-      <%= link_to "Add Note", new_student_student_note_path(@student), :class => 'ui button' %>
-    <% @student_note.reverse.each do |note| %>
-    <div class="ui green segment">
-      <div class="ui comments">
-        <div class="comment">
-          <div class="content">
-            <a class="author"><%= note.created_by %></a>
-            <div class="metadata">
-              <div class="date">    <%= note.created_at.strftime('%v') %></div>
-            </div>
-            <div class="text">
-              <p><%= note.note.html_safe %></p>
-            </div>
-            <div class="actions">
-              <a class="reply"><%= link_to "Edit", edit_student_note_path(note.id) %></a>
-              <% if current_teacher.admin? %>
-                <a class="reply"><%= link_to 'delete', student_note_path(note), :method => :delete, data: {:confirm => "You sure?" } ,
-                            :title => "Delete this note?" %></a>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <% end %>
-<p class="ui center aligned">
-  <div class="ui small feed">
-    <h4 class="ui header">Student Progress Record</h4>
-    <% @student_record.reverse_each.each do |record| %>
-      <div class="event">
-        <div class="content">
-          <div class="summary">
-            <%= "#{record.proficiency_level.prefix}#{number_with_precision(record.proficiency_level.level, strip_insignificant_zeros: true)}
-             #{record.proficiency_level.skill.name.capitalize} was achieved at #{record.created_at.strftime('%v')}"
-            %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  </p>
+<% end %>
 </div>
-</div>
-</div>
-</div>
+
+<div class="ui segment" id="student_record">
+ <h1 class="ui header center aligned"> Student Record</h1>
+ <p>
+   <ul>
+   <% @student_record.reverse_each.each do |record| %>
+    <li>
+      <%= "#{record.proficiency_level.prefix}#{number_with_precision(record.proficiency_level.level,
+             strip_insignificant_zeros: true)}
+             #{record.proficiency_level.skill.name.capitalize}
+             | #{record.created_at.strftime('%v')}"
+      %>
+     </li>
+   <% end %>
+   </ul>
+ </p>
 </div>
