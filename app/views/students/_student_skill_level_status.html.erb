@@ -12,7 +12,7 @@
     <% @color = "green" %>
   <% end %>
   <div class="column">
-    <%= content_tag :div  do %>
+    <%= content_tag :div, :class => "ui #{@color} inverted raised segment"  do %>
       <h3 class="ui header center aligned">
         <%= student.proficiency_level.skill.name.capitalize %>
       </h3>

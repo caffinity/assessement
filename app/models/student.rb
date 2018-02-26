@@ -7,7 +7,7 @@ class Student < ApplicationRecord
   belongs_to :classroom
   accepts_nested_attributes_for :skill_levels #proficiency_level_id & #student_id Statement optional
 
-  
+
 
   mount_uploader :avatar, AvatarUploader
 
@@ -15,12 +15,6 @@ class Student < ApplicationRecord
     StudentAchievement.find_by(student_id: id, achievement_id: achievement.id)
   end
 
-  # def student_progress(skill_level)
-  #   result = skill_level.proficiency_level.achievement.inject(0) do | memo, achievement|
-  #     @student_achievement = StudentAchievement.where(student_id: id, achievement_id: achievement.id)
-  #     memo + @student_acheivement
-  #   end
-  # end
 
   def student_progress(skill_level)
     skill_level.proficiency_level.achievement.each_with_object([]) do | achievement, arr |
@@ -29,6 +23,7 @@ class Student < ApplicationRecord
       end
     end.count
   end
+
 
 
   def self.to_csv(options = {})

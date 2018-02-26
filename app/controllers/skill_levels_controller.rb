@@ -29,6 +29,14 @@ class SkillLevelsController < ApplicationController
     end
   end
 
+  def update
+    @skill_level   = SkillLevel.find(params[:id])
+    if @skill_level.update(skill_level_params)
+      flash[:notice] = "well done"
+    else
+      render 'edit'
+    end
+  end
   def create_student_achievement
     @skill_level   = SkillLevel.find(params[:id])
     achievement    = params[:achievement]
@@ -75,7 +83,7 @@ class SkillLevelsController < ApplicationController
     params.require(:skill).permit(:name, :subject_id, :id)
   end
   def skill_level_params
-    params.require(:skill_level).permit(:id, :level,  :statement, :skill_id)
+    params.require(:skill_level).permit(:id, :proficiency_level_id, :level,  :statement, :skill_id)
   end
 
 end

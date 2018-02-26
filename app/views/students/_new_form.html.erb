@@ -1,9 +1,8 @@
 <div class="ui grid">
-  <div class="five wide column">
-  </div>
+  <div class="five wide column"></div>
   <div class="six wide column">
     <%= form_for(@student) do |form| %>
-    <div class="ui segment">
+  <div class="ui segment">
       <div class="ui big form">
       <% if @student.avatar? %>
         <%= image_tag(@student.avatar.url, :class => "ui medium centered circular image", :style => 'height: 14rem; width: 14rem;') %>
@@ -96,9 +95,6 @@
             %>
           </div>
       <% end %>
-
-
-
         <% @skill.each do |skill| %>
           <div class="field">
             <label><%= skill.name.capitalize %></label>
@@ -111,14 +107,10 @@
               <% end %>
             </div>
           <% end %>
-
-
-
-
           </div>
       </div>
 
-        <%= form.submit 'Update Student', :class => 'ui fluid green button' %>
+        <%= form.submit 'Create Student', :class => 'ui fluid green button' %>
       <% end %>
     </div>
 

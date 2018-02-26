@@ -33,14 +33,14 @@ class StudentsController < ApplicationController
 
   end
 
-	def show
+ def show
 		@student = Student.find(params[:id])
     @student.skill_levels.each do |skill_level|
-    @student_achievements = [] << @student.skill_levels.first.proficiency_level.achievement
-    @student_record = StudentRecord.where(student_id: @student.id)
+      @student_achievements = [] << @student.skill_levels.first.proficiency_level.achievement
+      @student_record = StudentRecord.where(student_id: @student.id)
     end
     @student_note = StudentNote.where(student_id: @student.id)
-  end
+ end
 
 
   def edit
@@ -48,21 +48,17 @@ class StudentsController < ApplicationController
     @proficiency_level = ProficiencyLevel.all
     @achievement = Achievement.all
     @skill = Skill.all
-    @skill_level_select = @student.skill_levels.each_with_object([]) do |skill, arr|
-        arr << skill.proficiency_level.id
 
-      end
   end
 
-  def update
+ def update
     @student = Student.find(params[:id])
 
       if @student.update(student_params)
         redirect_to student_path(@student)
       else
-
-
       end
+
   end
 
 
@@ -99,6 +95,7 @@ class StudentsController < ApplicationController
                                         :avatar,
                                         skill_levels_attributes:
                                         [
+                                          :id,
                                           :student_id,
                                           :proficiency_level_id,
                                           :statement
