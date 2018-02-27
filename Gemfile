@@ -34,6 +34,7 @@ gem 'jquery-rails'
 gem 'carrierwave', '~> 1.0'
 gem "figaro"
 gem 'trix'
+gem 'rails_admin'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
