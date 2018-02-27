@@ -1,5 +1,7 @@
 <div class="ui grid">
-  <div class="five wide column"></div>
+  <div class="five wide column">
+    <%= link_to "Back", :back, :class => 'ui inverted green button' %>
+  </div>
   <div class="six wide column">
     <%= form_for(@student) do |form| %>
   <div class="ui segment">
@@ -94,23 +96,38 @@
                             {:class=>'ui fluid selection dropdown'})
             %>
           </div>
+      <% else %>
+      <!-- Defaults for non Admin Users -->
+      <%= form.hidden_field :pupil_premium, :value => false %>
+      <%= form.hidden_field :free_school_meals, :value => false %>
+      <%= form.hidden_field :english_as_language, :value => false %>
       <% end %>
+
+<div class="ui divider"></div>
+<h3>Set Student Proficiency Levels</h3>
+
         <% @skill.each do |skill| %>
+        <% @options = ProficiencyLevel.where(skill_id: skill.id).each_with_object([]) do |proficiency_level, array | %>
+        <% @name = "#{proficiency_level.prefix}#{number_with_precision(proficiency_level.level,
+          strip_insignificant_zeros: true)} #{proficiency_level.skill.name.titleize}" %>
+          <% array << [@name, proficiency_level.id] %>
+          <% end %>
+
           <div class="field">
             <label><%= skill.name.capitalize %></label>
               <%= form.fields_for :skill_levels do |builder| %>
                 <%= builder.select(:proficiency_level_id,
-                                    options_for_select(@skill_level_select),
+                                    options_for_select(@options),
                                    {:class => 'ui fluid selection dropdown'},
-                                   {:prompt => "#{skill.name.capitalize} level"}  )
+                                   {:prompt => "Select Level"}  )
                  %>
               <% end %>
             </div>
           <% end %>
           </div>
-      </div>
 
         <%= form.submit 'Create Student', :class => 'ui fluid green button' %>
+      </div>
       <% end %>
     </div>
 
