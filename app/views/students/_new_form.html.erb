@@ -8,15 +8,14 @@
       <div class="ui big form">
       <% if @student.avatar? %>
         <%= image_tag(@student.avatar.url, :class => "ui medium centered circular image", :style => 'height: 14rem; width: 14rem;') %>
-
       <% end %>
       <div class="field">
-        <label> Update Student Avatar </label>
-        <%= form.file_field :avatar %>
+        <label> Student Picture </label>
+        <%= form.file_field :avatar, :class => 'ui huge green right floated button' %>
     </div>
-      <h3 class="ui header">Update Name                 </h3>
+      <h3 class="ui header">Student Name                 </h3>
         <div class="two fields">
-          <%= form.text_field :first_name %><%= form.text_field :last_name %>
+          <%= form.text_field :first_name, placeholder: "First Name" %><%= form.text_field :last_name, placeholder: "Last Name" %>
         </div>
       </div>
   <!-- Admin only -->
@@ -25,8 +24,8 @@
         <label>Classroom</label>
         <%= form.select(:classroom_id, options_for_select(
           Classroom.all.pluck(:name, :id),
-          @student.classroom_id),
-          {prompt: 'Update Classroom'},
+          current_teacher.classroom),
+          {prompt: 'Select Classroom'},
           :class => 'ui fluid selection dropdown' )
           %>
         </div>
@@ -36,7 +35,7 @@
           <%= form.select(:gender, options_for_select([
             ["Male", true],
             ["Female", false]], @student.gender),
-            {prompt: 'Update Student Gender'},
+            {prompt: 'The Student is...'},
             {:class=>'ui fluid selection dropdown'})
             %>
           </div>
@@ -62,8 +61,16 @@
                               {:class=>'ui fluid selection dropdown'})
         %>
       </div>
+      <div class="field">
+        <label>Special Education Needs</label>
+        <sub>Please list any special needs this student requires:
+        </sub><br>
+          <%= form.text_area :special_education_need, placeholder: "e.g Wheelchair Bound, requires manual handling" %>
+      </div>
+    </div>
 
-
+<div class="ui segment">
+  <h2>Admin Options</h2>
       <% if current_teacher.admin? %>
         <!-- English as Second Lanugage -->
           <div class="field">
@@ -102,9 +109,11 @@
       <%= form.hidden_field :free_school_meals, :value => false %>
       <%= form.hidden_field :english_as_language, :value => false %>
       <% end %>
-
+</div>
 <div class="ui divider"></div>
-<h3>Set Student Proficiency Levels</h3>
+<div class="ui segment">
+<h2>Set Student Proficiency Levels</h2>
+<p> Please set the students proficiency level in each of the available skills, If you have any questions about this section please contact one of the Senior Management Team. </p>
 
         <% @skill.each do |skill| %>
         <% @options = ProficiencyLevel.where(skill_id: skill.id).each_with_object([]) do |proficiency_level, array | %>
@@ -125,12 +134,15 @@
             </div>
           <% end %>
           </div>
-
-        <%= form.submit 'Create Student', :class => 'ui fluid green button' %>
+  <%= form.submit 'Create Student', :class => 'ui fluid green button' %>
       </div>
-      <% end %>
-    </div>
-
-    </div>
-  <div class="five wide column"></div>
+  <div class="five wide column">
+        <div class="ui green segment">
+          <%= form.submit 'Create Student', :class => 'ui fluid green button' %>
+        </div>
+        <div class="ui green segment">
+          <%= form.submit 'Create and Add Another', :class => 'ui fluid inverted green button' %>
+        </div>
+          <% end %>
+</div>
 </div>

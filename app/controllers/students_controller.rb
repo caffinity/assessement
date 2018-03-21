@@ -35,10 +35,8 @@ class StudentsController < ApplicationController
 
  def show
 		@student = Student.find(params[:id])
-    @student.skill_levels.each do |skill_level|
-      @student_achievements = [] << @student.skill_levels.first.proficiency_level.achievement
-      @student_record = StudentRecord.where(student_id: @student.id)
-    end
+    @student_achievements = @student.skill_levels.first.proficiency_level.achievement
+    @student_record = StudentRecord.where(student_id: @student.id)
     @student_note = StudentNote.where(student_id: @student.id)
  end
 
@@ -64,11 +62,14 @@ class StudentsController < ApplicationController
 
 	def create
 		@student = Student.new(student_params)
-		if @student.save
-			redirect_to student_path(@student)
-		else
+		if @student.save && params[:commit] == "Create Student"
+      redirect_to student_path(@student)
+		elsif @student.save && params[:commit] == "Create and Add Another"
+      redirect_to new_student_path
+    else
       render 'show'
 		end
+
 	end
 
 	def destroy
@@ -77,6 +78,10 @@ class StudentsController < ApplicationController
 
 
 	  private
+
+  def create_another?
+
+  end
 
 	def set_student
     @student = Student.find(params[:id])
@@ -93,6 +98,7 @@ class StudentsController < ApplicationController
 	  																		:gender,
 	  																		:free_school_meals,
                                         :avatar,
+                                        :commit,
                                         skill_levels_attributes:
                                         [
                                           :id,

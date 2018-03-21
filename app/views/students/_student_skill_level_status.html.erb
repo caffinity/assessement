@@ -5,9 +5,9 @@
   <% @percent_achieved = @progress/@count.to_f %>
   <% @levels = [".41".to_f,".75".to_f] %>
   <% if @percent_achieved < @levels[0] %>
-    <% @color = "red" %>
-  <% elsif @percent_achieved > @levels[0] && @percent_achieved < @levels[1] %>
     <% @color = "yellow" %>
+  <% elsif @percent_achieved > @levels[0] && @percent_achieved < @levels[1] %>
+    <% @color = "orange" %>
   <% else %>
     <% @color = "green" %>
   <% end %>
@@ -35,12 +35,16 @@
                   <div class="label">
                     <%= @percent_achieved >= '.75'.to_f ? 'Mastered' : (@percent_achieved >= '.41'.to_f ? 'Developing' : 'Emerging') %></div>
                     <script charset="utf-8">
+
+                    $(window).on('load', function() {
                       $('#progress').progress({
                                                 label: 'ratio',
                                                 text: {
                                                 ratio: '{value} of {total} '
                                                 }
                                               });
+                    });
+
                     </script>
               <% end %>
             </div>
