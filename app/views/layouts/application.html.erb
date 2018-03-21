@@ -16,7 +16,9 @@
       <%= link_to 'Home', pages_path, :class => 'ui large inverted white button' %>
       <%= link_to 'Classroom', classrooms_path, :class => 'ui large inverted white button' %>
       <% if teacher_signed_in? %>
-      <% if Classroom.find_by(teacher_id: current_teacher.id).nil?  %>
+      <% if Classroom.find_by(teacher_id: current_teacher.id).nil? && !current_teacher.admin?  %>
+      <% elsif current_teacher.admin? %>
+      <%= link_to 'Student', students_path, :class => 'ui large inverted white button' %>
       <% else %>
       <%= link_to 'Student', students_path, :class => 'ui large inverted white button' %>
       <% end %>
