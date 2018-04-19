@@ -1,8 +1,7 @@
 class SkillLevel < ApplicationRecord
   belongs_to :proficiency_level
 	belongs_to :student
-  has_many   :skill_level_achievements, -> { where(skill_level: self) }, # Default scope on relationship
-             through: :proficiency_level
+  has_many   :skill_level_achievements
 
   def self.level_up_proficiency!
       ActiveRecord::Base.transaction do # Starts a transaction, will rollback all changes if any part fails
