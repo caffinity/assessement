@@ -1,4 +1,4 @@
-
+<% @div_id = 1 %>
 <% @student.skill_levels.each do |student| %>
   <% @count = student.proficiency_level.achievement.count %>
   <% @progress = student.student.student_progress(student) %>
@@ -25,7 +25,7 @@
           <div class="ui divider">
           </div>
             <div class="sub header">
-              <%= content_tag :div, :class => 'ui small indicating progress', id: "progress",
+              <%= content_tag :div, :class => 'ui small indicating progress', id: "progress_#{@div_id}" ,
               data: {value: @progress,
                      total: @count } do
               %>
@@ -37,7 +37,7 @@
                     <script charset="utf-8">
 
                     $(window).on('load', function() {
-                      $('#progress').progress({
+                      $('#progress_<%= @div_id %>').progress({
                                                 label: 'ratio',
                                                 text: {
                                                 ratio: '{value} of {total} '
@@ -46,9 +46,11 @@
                     });
 
                     </script>
+                    <% @div_id = @div_id + 1 %>
               <% end %>
             </div>
         </h2>
         <% end %>
   </div><% end %>
+
 <% end %>
